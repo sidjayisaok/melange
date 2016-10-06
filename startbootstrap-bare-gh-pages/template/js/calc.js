@@ -1,8 +1,9 @@
 //vanilla script demo with es6
 const dummy = 0;
-document.querySelector('#solutionA').innerHTML = '<p>Total: ' + dummy + '</p>'; 
-document.querySelector('#solutionB').innerHTML = '<p>Amount split between ' + dummy + ' party members: ' + dummy + '</p>';
+document.querySelector('#solutionA').innerHTML = '<p>Total: $' + dummy + '</p>'; 
+document.querySelector('#solutionB').innerHTML = '<p>Amount split between ' + dummy + ' party members: $' + dummy + '</p>';
 document.querySelector('#solutionC').innerHTML = '<p><svg width="300" height="300" ><circle cx="115" cy="115" r="100" fill="blue" /></svg></p>';
+document.querySelector('#solutionD').innerHTML = '<p>Total tip is : $' + dummy + '</p>';
 
 //our d3 pie chart
 function pieGraph(total, percent, tax, answer){
@@ -66,16 +67,17 @@ function TipCalc(){
             alert("please enter a number greater than zero");
             return false;
         }
-        else if((party === NaN) || (total === NaN) || (tax === NaN) || (percent === NaN)){
+        else if((isNaN(party)) || (isNaN(total)) || (isNaN(tax)) || (isNaN(percent))){
             alert("You must enter numbers only");
             return false;
         }
         else{
         let answer = total + .01*tax*total + .01*percent*(total + .01*tax*total);
-        console.log(answer);
         //render elements to the page
-        document.getElementById("solutionA").innerHTML = '<p>Total: ' + answer + '</p>'; 
-        document.getElementById("solutionB").innerHTML = '<p>Amount split between ' + party + ' party members: ' + answer / party + '</p>';
+        document.getElementById("solutionA").innerHTML = '<p>Total: $' + answer.toFixed(2) + '</p>'; 
+        document.getElementById("solutionB").innerHTML = '<p>Amount split between ' + party + ' party members: $' + (answer / party).toFixed(2) + '</p>';
+        document.getElementById("solutionD").innerHTML = '<p>Total tip is : $' + (answer - total - (.01*tax*total)).toFixed(2) + '</p>';
+        //recursively call pie graph to render it to the page
         pieGraph(total, percent, tax, answer);
         }
         return false;
