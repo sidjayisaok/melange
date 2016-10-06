@@ -71,7 +71,7 @@ function TipCalc(){
             return false;
         }
         else{
-        let answer = total + .01*tax*total + .01*percent*total;
+        let answer = total + .01*tax*total + .01*percent*(total + .01*tax*total);
         console.log(answer);
         //render elements to the page
         document.getElementById("solutionA").innerHTML = '<p>Total: ' + answer + '</p>'; 
