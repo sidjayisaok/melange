@@ -16,7 +16,7 @@ function pieGraph(total, percent, tax, answer, tip, taxTotal){
         r = 150
 
         color = d3.scale.category20c();     
-        data = [{"label":"total", "value": (total/answer)},
+        data = [{"label":"pre-total", "value": (total/answer)},
                 {"label":"tip", "value": (tip/answer)},
                 {"label":"tax", "value": (taxTotal/answer)}
                ];
