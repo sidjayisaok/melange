@@ -4,9 +4,10 @@ document.querySelector('#solutionA').innerHTML = '<p>Grand total: $' + dummy + '
 document.querySelector('#solutionB').innerHTML = '<p>Amount split between ' + dummy + ' party members: $' + dummy + '</p>';
 document.querySelector('#solutionC').innerHTML = '<p><svg width="300" height="300" ><circle cx="150" cy="150" r="100" fill="blue" /></svg></p>';
 document.querySelector('#solutionD').innerHTML = '<p>Total tip is : $' + dummy + '</p>';
+document.querySelector('#solutionE').innerHTML = '<p>Taxes paid is : $' + dummy + '</p>';
 
 //our d3 pie chart
-function pieGraph(total, percent, tax, answer){
+function pieGraph(total, percent, tax, answer, tip, taxTotal){
     //remove duplicates
     d3.select("svg").remove();
     //set up pie graph
@@ -15,10 +16,11 @@ function pieGraph(total, percent, tax, answer){
         r = 150
 
         color = d3.scale.category20c();     
-        data = [{"label":"total", "value": total / answer},
-                {"label":"tip", "value": percent / answer},
-                {"label":"tax", "value": tax / answer}
+        data = [{"label":"total", "value": (total/answer)},
+                {"label":"tip", "value": (tip/answer)},
+                {"label":"tax", "value": (taxTotal/answer)}
                ];
+
     //target the page with data
     let vis = d3.select("#solutionC")
                 .append("svg:svg")             
@@ -74,12 +76,15 @@ function TipCalc(){
         }
         else{
         let answer = total + .01*tax*total + .01*percent*(total + .01*tax*total);
+        let tip = (answer - total - (.01*tax*total));
+        let taxTotal = .01*tax*total;
         //render elements to the page
         document.getElementById("solutionA").innerHTML = '<p>Grand total: $' + answer.toFixed(2) + '</p>'; 
         document.getElementById("solutionB").innerHTML = '<p>Amount split between ' + party + ' party members: $' + (answer / party).toFixed(2) + '</p>';
-        document.getElementById("solutionD").innerHTML = '<p>Total tip is : $' + (answer - total - (.01*tax*total)).toFixed(2) + '</p>';
+        document.getElementById("solutionD").innerHTML = '<p>Total tip is : $' + tip.toFixed(2) + '</p>';
+        document.getElementById("solutionE").innerHTML = '<p>Taxes paid is : $' + taxTotal.toFixed(2) + '</p>';
         //recursively call pie graph to render it to the page
-        pieGraph(total, percent, tax, answer);
+        pieGraph(total, percent, tax, answer, tip, taxTotal);
         }
         return false;
         }; 
