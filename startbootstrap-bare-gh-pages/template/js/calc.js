@@ -2,7 +2,7 @@
 const dummy = 0;
 document.querySelector('#solutionA').innerHTML = '<p>Grand total: $' + dummy + '</p>'; 
 document.querySelector('#solutionB').innerHTML = '<p>Amount split between ' + dummy + ' party members: $' + dummy + '</p>';
-document.querySelector('#solutionC').innerHTML = '<p><svg width="300" height="300" ><circle cx="150" cy="150" r="150" fill="blue" /></svg></p>';
+document.querySelector('#solutionC').innerHTML = '<p><svg width="300" height="300" ><circle cx="150" cy="150" r="150" fill="blue" class="myTarget"/></svg></p>';
 document.querySelector('#solutionD').innerHTML = '<p>Total tip is : $' + dummy + '</p>';
 document.querySelector('#solutionE').innerHTML = '<p>Taxes paid is : $' + dummy + '</p>';
 
@@ -28,17 +28,18 @@ function pieGraph(total, percent, tax, answer, tip, taxTotal){
                 .data([data])
                 .attr("width", w)           
                 .attr("height", h)
+                .attr("class", "myTarget")
                 .append("svg:g")                
-                .attr("transform", "translate(" + r + "," + r + ")")    
+                .attr("transform", "translate(" + r + "," + r + ")")   
     let arc = d3.svg.arc()              
                 .outerRadius(r);
     let pie = d3.layout.pie()           
-                .value(function(d) { return d.value; });    
+                .value(function(d) { return d.value; }); 
     let arcs = vis.selectAll("g.slice")     
                   .data(pie)
                   .enter()                            
                   .append("svg:g")                
-                  .attr("class", "slice");   
+                  .attr("class", "slice"); 
         
         arcs.append("svg:path")
             .attr("fill", function(d, i) { return color(i); } ) 
