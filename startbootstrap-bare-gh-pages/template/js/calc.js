@@ -2,7 +2,7 @@
 const dummy = 0;
 document.querySelector('#solutionA').innerHTML = '<p>Grand total: $' + dummy + '</p>'; 
 document.querySelector('#solutionB').innerHTML = '<p>Amount split between ' + dummy + ' party members: $' + dummy + '</p>';
-document.querySelector('#solutionC').innerHTML = '<p><svg width="300" height="300" ><circle cx="150" cy="150" r="100" fill="blue" /></svg></p>';
+document.querySelector('#solutionC').innerHTML = '<p><svg width="300" height="300" ><circle cx="150" cy="150" r="150" fill="blue" /></svg></p>';
 document.querySelector('#solutionD').innerHTML = '<p>Total tip is : $' + dummy + '</p>';
 document.querySelector('#solutionE').innerHTML = '<p>Taxes paid is : $' + dummy + '</p>';
 
@@ -15,7 +15,8 @@ function pieGraph(total, percent, tax, answer, tip, taxTotal){
         h = 300,
         r = 150
 
-        color = d3.scale.category20c();     
+        color = d3.scale.category20c();
+        //my data fields    
         data = [{"label":"pre-total", "value": (total/answer)},
                 {"label":"tip", "value": (tip/answer)},
                 {"label":"tax", "value": (taxTotal/answer)}
