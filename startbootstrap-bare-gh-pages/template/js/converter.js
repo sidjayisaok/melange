@@ -15,32 +15,25 @@ $().on('submit', function(){
 });
 
 
-function getGraph(){
-    //bar graph via d3
-let svg = d3.select("#barChart"),
-    margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = +svg.attr("width") - margin.left - margin.right,
-    height = +svg.attr("height") - margin.top - margin.bottom;
+var svg = d3.select("svg"),
+margin = {top: 20, right: 20, bottom: 30, left: 40},
+width = +svg.attr("width") - margin.left - margin.right,
+height = +svg.attr("height") - margin.top - margin.bottom;
 
-let x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
     y = d3.scaleLinear().rangeRound([height, 0]);
 
-let g = svg.append("g")
-           .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-//our data field
 d3.csv("/misc/data.csv", function(d) {
-        return{
-        Currency: d.Currency,
-        Share: +d.Share
-        }
+  d.frequency = +d.frequency;
+  return d;
 }, function(error, data) {
   if (error) throw error;
 
-  console.log(data);
-
-  x.domain(data.map(function(d) { return d.Currency; }));
-  y.domain([0, d3.max(data, function(d) { return d.Share; })]);
+  x.domain(data.map(function(d) { return d.letter; }));
+  y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
 
   g.append("g")
       .attr("class", "axis axis--x")
@@ -55,18 +48,17 @@ d3.csv("/misc/data.csv", function(d) {
       .attr("y", 6)
       .attr("dy", "0.71em")
       .attr("text-anchor", "end")
-      .text("currency");
+      .text("Frequency");
 
   g.selectAll(".bar")
     .data(data)
     .enter().append("rect")
       .attr("class", "bar")
-      .attr("x", function(d) { return x(d.Currency); })
-      .attr("y", function(d) { return y(d.Share); })
+      .attr("x", function(d) { return x(d.letter); })
+      .attr("y", function(d) { return y(d.frequency); })
       .attr("width", x.bandwidth())
-      .attr("height", function(d) { return height - y(d.Share); });
+      .attr("fill", "green")
+      .attr("height", function(d) { return height - y(d.frequency); });
 });
-}
 
-console.log(getGraph());
 

@@ -3,4 +3,8 @@
         font-family: 'Lato', sans-serif;
     }
 
+   .bar:hover {
+      fill: red;
+    }
+
     
