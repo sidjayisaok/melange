@@ -29,7 +29,7 @@ $("#convert").on('click', function(){
         console.log(res);
         $(".currentDate").html("Rates current as of " + res.date);
         $(".myConversion").html("You have selected " + res.base);
-        $(".yourConversion").html("Converting " + yourAmount + " " + myCurrency + " is worth approximately " + (res.rates[yourCurrency]*yourAmount) + " " + yourCurrency);
+        $(".yourConversion").html("Converting " + yourAmount + " " + myCurrency + " is worth approximately " + (res.rates[yourCurrency]*yourAmount).toFixed(2) + " " + yourCurrency);
     })
     return false;
 });
