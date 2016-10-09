@@ -34,7 +34,7 @@ function pieGraph(total, percent, tax, answer, tip, taxTotal){
     let arc = d3.svg.arc()              
                 .outerRadius(r);
     let pie = d3.layout.pie()           
-                .value(function(d) { return d.value; }); 
+                .value((d)=> { return d.value; }); 
     let arcs = vis.selectAll("g.slice")     
                   .data(pie)
                   .enter()                            
@@ -42,17 +42,17 @@ function pieGraph(total, percent, tax, answer, tip, taxTotal){
                   .attr("class", "slice"); 
         
         arcs.append("svg:path")
-            .attr("fill", function(d, i) { return color(i); } ) 
+            .attr("fill", (d, i)=> { return color(i); } ) 
             .attr("d", arc);                                    
         
         arcs.append("svg:text")                                     
-            .attr("transform", function(d) {                   
+            .attr("transform", (d)=> {                   
                 d.innerRadius = 0;
                 d.outerRadius = r;
                 return "translate(" + arc.centroid(d) + ")";
             })
             .attr("text-anchor", "middle")
-            .text(function(d, i) { return data[i].label; });
+            .text((d, i)=> { return data[i].label; });
 }        
 
 //our calculator function

@@ -55,31 +55,51 @@
 
     <div class="container col-md-12 text-center">
 
-        <div class="container">
-            <div class="col-md-6 text-center animated fadeInDown">
-                <div id="barChart jumbotron"><svg width="750" height="350"></svg></div>
+        <div class="container animated fadeInDown">
+
+            <div class="col-md-3 text-center">
+                <h5><p>Most frequently traded currencies in the world</p></h5>
+                <h6><p>Source: Triennial Central Bank Survey</p></h6>
             </div>
+
+            <div class="col-md-6 text-center">
+                <div id="barChart jumbotron"><p><svg width="750" height="350"></svg></p></div>
+            </div>
+
+
         </div>
         
-        <div class="container text-center col-md-12">
-            <div class="animated fadeInLeft text-center">
-                <div class="jumbotron text-center animated fadeInUp">
+        <div class="container text-center col-md-12 animated fadeInLeft">
+            <div class="text-center">
+                <div class="text-center col-md-4 jumbotron animated fadeInUp">
                     <form>
                         <div class="form-group text-center">
                             <label for="exampleInput2">Your Currency</label>
-                            <input type="text" class="form-control text-center" id="party" placeholder="Currency A">
+                            <input type="text" class="form-control text-center" id="myCurrency" placeholder="Currency A">
                         </div>
 
                         <div class="form-group text-center">
                             <label for="exampleInput2">Currency to Convert</label>
-                            <input type="text" class="form-control text-center" id="total" placeholder="Currency B">
+                            <input type="text" class="form-control text-center" id="yourCurrency" placeholder="Currency B">
+                        </div>
+
+                          <div class="form-group text-center">
+                            <label for="exampleInput2">Amount to Convert</label>
+                            <input type="text" class="form-control text-center" id="yourAmount" placeholder="Amount">
                         </div>
 
                         <div class="form-group text-center">
-                            <button type="submit" class="btn btn-md btn-info" id="solve" onclick="return TipCalc()" onsubmit="return false">convert</button>
-                        </div>
+                            <button type="submit" class="btn btn-md btn-info" id="convert" onclick="return false">convert</button>
+                        </div>    
                     </form>
-                </div>    
+                </div>  
+
+                <div class="container col-md-6">
+                    <div class="text-center currentDate"></div>
+                    <div class="text-center myConversion"></div>
+                    <div class="text-center yourConversion"></div>
+                </div>
+
             </div>
         </div>
 

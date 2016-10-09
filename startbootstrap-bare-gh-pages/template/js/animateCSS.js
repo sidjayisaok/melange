@@ -10,6 +10,7 @@ let fadeoutClass = 'animated fadeOutLeft';
 let endClass ='webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
 //animates rectangles
 $('.myTarget').on({
+    
  'click': ()=>{
      $('.myTarget').addClass(bounceClass).one(endClass, function(){
          $(this).removeClass(bounceClass);
