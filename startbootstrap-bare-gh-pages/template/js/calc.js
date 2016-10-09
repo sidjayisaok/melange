@@ -2,7 +2,7 @@
 const dummy = 0;
 document.querySelector('#solutionA').innerHTML = '<p>Grand total: $' + dummy + '</p>'; 
 document.querySelector('#solutionB').innerHTML = '<p>Amount split between ' + dummy + ' party members: $' + dummy + '</p>';
-document.querySelector('#solutionC').innerHTML = '<p><svg width="300" height="300" ><circle cx="150" cy="150" r="150" fill="blue" class="myTarget"/></svg></p>';
+document.querySelector('#solutionC').innerHTML = '<p><svg width="300" height="300" ><circle cx="150" cy="150" r="150" class="myTarget"/></svg></p>';
 document.querySelector('#solutionD').innerHTML = '<p>Total tip is : $' + dummy + '</p>';
 document.querySelector('#solutionE').innerHTML = '<p>Taxes paid is : $' + dummy + '</p>';
 

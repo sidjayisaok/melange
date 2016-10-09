@@ -3,9 +3,15 @@
 //exchange rates set by the European Central Bank
 
 $("#convert").on('click', function(){
-    let myCurrency = $('#myCurrency').val();
-    let yourCurrency = $('#yourCurrency').val();
-    let yourAmount = $('#yourAmount').val();
+    //our basic variables
+    let thisCurrency = $('#myCurrency').val();
+    let thatCurrency = $('#yourCurrency').val();
+    let thisAmount = $('#yourAmount').val();
+    //convert to proper format
+    let myCurrency = thisCurrency.toUpperCase();
+    let yourCurrency = thatCurrency.toUpperCase();
+    let yourAmount = parseFloat(thisAmount);
+    //API link
     let queryURL = "https://api.fixer.io/latest?base=" + myCurrency + "&rates=" + yourCurrency;
     //logic controllers
     if(yourAmount === 0){
