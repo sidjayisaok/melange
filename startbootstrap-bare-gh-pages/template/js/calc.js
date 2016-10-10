@@ -66,6 +66,7 @@ function pieGraph(total, percent, tax, answer, tip, taxTotal){
                 return "translate(" + arc.centroid(d) + ")";
             })
             .attr("text-anchor", "middle")
+            .attr("color", "#335577")
             .text((d, i)=> { return data[i].label; });
 }        
 
