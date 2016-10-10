@@ -30,7 +30,8 @@ function pieGraph(total, percent, tax, answer, tip, taxTotal){
                 .attr("height", h)
                 .attr("class", "myTarget")
                 .append("svg:g")                
-                .attr("transform", "translate(" + r + "," + r + ")")   
+                .attr("transform", "translate(" + r + "," + r + ")")
+                 
     let arc = d3.svg.arc()              
                 .outerRadius(r);
     let pie = d3.layout.pie()           
@@ -39,7 +40,20 @@ function pieGraph(total, percent, tax, answer, tip, taxTotal){
                   .data(pie)
                   .enter()                            
                   .append("svg:g")                
-                  .attr("class", "slice"); 
+                  .attr("class", "slice")
+                  .on("mouseover", function (d) {
+                    d3.select("#tooltip")
+                        .style("left", d3.event.pageX + "px")
+                        .style("top", d3.event.pageY + "px")
+                        .style("opacity", 1)
+                        .select("#value")
+                        .text(d.value);
+                  })
+                    .on("mouseout", function () {
+                    // Hide the tooltip
+                    d3.select("#tooltip")
+                        .style("opacity", 0);
+                    }); 
         
         arcs.append("svg:path")
             .attr("fill", (d, i)=> { return color(i); } ) 

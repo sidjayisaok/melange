@@ -27,9 +27,10 @@ $("#convert").on('click', function(){
         datatype: 'json'
     }).done(function(res){
         console.log(res);
-        $(".currentDate").html("Rates current as of " + res.date);
-        $(".myConversion").html("You have selected " + res.base);
-        $(".yourConversion").html("Converting " + yourAmount + " " + myCurrency + " is worth approximately " + (res.rates[yourCurrency]*yourAmount).toFixed(2) + " " + yourCurrency);
+        $(".currentDate").html(" Rates current as of " + res.date);
+        $(".myConversion").html(" You have selected " + res.base);
+        $(".myRatio").html(" The current ratio is 1 " + res.base + " to " + res.rates[yourCurrency] + " " + yourCurrency);
+        $(".yourConversion").html(" Converting " + yourAmount + " " + myCurrency + " is worth approximately " + (res.rates[yourCurrency]*yourAmount).toFixed(2) + " " + yourCurrency);
     })
     return false;
 });

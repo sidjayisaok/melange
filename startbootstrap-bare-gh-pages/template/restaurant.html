@@ -14,6 +14,7 @@
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/index.css" rel="stylesheet">
 
@@ -62,6 +63,10 @@
                 <h4 id="solutionD"></h4>
                 <h4 id="solutionE"></h4>
                 <h6 id="solutionC"></h6>
+                    <div id="tooltip" class="hidden">
+                        <p><strong>Percent</strong></p>
+                        <p><span id="value">100</span>%</p>
+                    </div>
             </div>
         </div>
 
@@ -89,7 +94,7 @@
                     </div>
 
                      <div class="form-group text-center">
-                        <button type="submit" class="btn btn-md btn-info" id="solve" onclick="return TipCalc()" onsubmit="return false">calculate</button>
+                        <button type="submit" class="btn btn-md btn-info fa fa-spoon" id="solve" onclick="return TipCalc()" onsubmit="return false">calculate</button>
                     </div>
                 </form>
             </div>
