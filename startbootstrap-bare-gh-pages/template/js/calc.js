@@ -40,20 +40,7 @@ function pieGraph(total, percent, tax, answer, tip, taxTotal){
                   .data(pie)
                   .enter()                            
                   .append("svg:g")                
-                  .attr("class", "slice")
-                  .on("mouseover", function (d) {
-                    d3.select("#tooltip")
-                        .style("left", d3.event.pageX + "px")
-                        .style("top", d3.event.pageY + "px")
-                        .style("opacity", 1)
-                        .select("#value")
-                        .text(d.value);
-                  })
-                    .on("mouseout", function () {
-                    // Hide the tooltip
-                    d3.select("#tooltip")
-                        .style("opacity", 0);
-                    }); 
+                  .attr("class", "slice"); 
         
         arcs.append("svg:path")
             .attr("fill", (d, i)=> { return color(i); } ) 
@@ -66,7 +53,20 @@ function pieGraph(total, percent, tax, answer, tip, taxTotal){
                 return "translate(" + arc.centroid(d) + ")";
             })
             .attr("text-anchor", "middle")
-            .attr("color", "#335577")
+            .style("fill", "#335533")
+            .on("mouseover", function (d) {
+                    d3.select("#tooltip")
+                        .style("left", d3.event.pageX + "px")
+                        .style("top", d3.event.pageY + "px")
+                        .style("opacity", 1)
+                        .select("#value")
+                        .text(d.value);
+                  })
+                    .on("mouseout", function () {
+                    // Hide the tooltip
+                    d3.select("#tooltip")
+                        .style("opacity", 0);
+                    })
             .text((d, i)=> { return data[i].label; });
 }        
 
