@@ -59,34 +59,18 @@
 
     <!-- Page Content -->
     <div class="container col-md-12 text-center">
-        
-        <div class="col-md-1"></div>
 
-        <div class="container jumbotron text-center col-md-5 animated fadeInLeft">
-            <div class="text-center">
-                <hr class="m-y-2">
-                <h5 id="solutionA"></h5>
-                <h5 id="solutionB"></h5>
-                <h5 id="solutionD"></h5>
-                <h5 id="solutionE"></h5>
-                <h6 id="solutionC"></h6>
-                    <div id="tooltip" class="hidden">
-                        <p><strong>Percent</strong></p>
-                        <p><span id="value">100</span>%</p>
-                    </div>
-            </div>
-        </div>
+        <div class="col-md-3"></div>
 
-        <div class="col-md-1"></div>
-
-            <div class="col-md-5 text-center jumbotron animated fadeInRight">
-
+            <div class="col-md-6 text-center jumbotron animated fadeInRight">
+                <div class="text-center">
+                    <h4>Select Imperial or Metric units</h4>
+                </div>
                 <div class="dropdown">
-                    <button onclick="myDropDown()" class="dropbtn btn btn-info btn-md">Select Imperial or Metric</button>
-                    <div id="myDropdown" class="dropdown-content" onsubmit="return false">
-                        <a href="#Imperial">Imperial</a>
-                        <a href="#Metric">Metric</a>
-                    </div>
+                    <select class="btn btn-info btn-lg">
+                        <option id="Imperial">Imperial</option>
+                        <option id="Metric">Metric</option>
+                    </select>
                 </div>
 
                 <form>
@@ -106,13 +90,41 @@
                     </div>
                 </form>
             </div>
+
+            <div class="col-md-3"></div>
     </div>
+
+     <div class="container col-md-12 text-center"> 
+            
+            <div class="col-md-3"></div>
+
+            <div class="container jumbotron text-center col-md-6 animated fadeInLeft">
+                <div class="text-center">
+                    <hr class="m-y-2">
+                    <h5 id="solutionA"></h5>
+                    <h5 id="solutionB"></h5>
+                    <h5 id="solutionD"></h5>
+                    <h5 id="solutionE"></h5>
+                    <h6 id="solutionC"></h6>
+                        <div id="tooltip" class="hidden">
+                            <p><strong>Percent</strong></p>
+                            <p><span id="value">100</span>%</p>
+                        </div>
+                </div>
+
+            <div class="col-md-3"></div>
+
+            </div>
+    </div>
+
+    <footer>
+        <h6 class="text-center  animated fadeInLeft">2016 Sid Jay</h6>
+    </footer>
 
     <!-- jQuery Version 1.11.1 -->
     <script src="js/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
     <script src="js/BMI.js"></script>
-    <script src="js/myDropDown.js"></script>
     <script src="js/animateCSS.js"></script>
   
 
