@@ -14,11 +14,13 @@ $("#convert").on('click', function(){
     //API link
     let queryURL = "https://api.fixer.io/latest?base=" + myCurrency + "&rates=" + yourCurrency;
     //logic controllers
-    if(yourAmount === 0){
+    if(yourAmount <= 0){
         alert("Please select an amount greater than zero");
+        return;
     }
     else if(isNaN(yourAmount)){
         alert("Please use numbers for the amount field only");
+        return;
     }
     //API call
     $.ajax({
