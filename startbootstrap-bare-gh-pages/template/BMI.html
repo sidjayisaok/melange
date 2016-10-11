@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Restaurant Calculator</title>
+    <title>Body Mass Index Calculator</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
@@ -33,16 +33,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Restaurant Tip Calculator</a>
+                <a class="navbar-brand" href="#">Body Mass Index Calculator</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="BMI.html">BMI Calculator</a>
+                        <a href="currency.html">Currency Converter</a>
                     </li>
                     <li>
-                        <a href="currency.html">Currency Converter</a>
+                        <a href="restaurant.html">Restaurant Calculator</a>
                     </li>
                     <li>
                         <a href="#">About</a>
@@ -80,29 +80,29 @@
         <div class="col-md-1"></div>
 
             <div class="col-md-5 text-center jumbotron animated fadeInRight">
+
+                <div class="dropdown">
+                    <button onclick="myDropDown()" class="dropbtn btn btn-info btn-md">Select Imperial or Metric</button>
+                    <div id="myDropdown" class="dropdown-content" onsubmit="return false">
+                        <a href="#Imperial">Imperial</a>
+                        <a href="#Metric">Metric</a>
+                    </div>
+                </div>
+
                 <form>
-                    <div class="form-group text-center">
-                        <label for="exampleInput2">Party size</label>
-                        <input type="text" class="form-control text-center" id="party" placeholder="Party">
-                    </div>
 
                     <div class="form-group text-center">
-                        <label for="exampleInput2">Total before taxes</label>
-                        <input type="text" class="form-control text-center" id="total" placeholder="Total">
+                        <label for="exampleInput2">Insert Height</label>
+                        <input type="text" class="form-control text-center" id="total" placeholder="Height">
                     </div>
 
                      <div class="form-group text-center">
-                        <label for="exampleInput2">sales tax</label>
-                        <input type="text" class="form-control text-center" id="tax" placeholder="Tax">
+                        <label for="exampleInput2">Insert Weight</label>
+                        <input type="text" class="form-control text-center" id="tax" placeholder="Weight">
                     </div>
 
                      <div class="form-group text-center">
-                        <label for="exampleInput2">tip percentage</label>
-                        <input type="text" class="form-control text-center" id="tip" placeholder="Tip">
-                    </div>
-
-                     <div class="form-group text-center">
-                        <button type="submit" class="btn btn-md btn-info fa fa-spoon" id="solve" onclick="return TipCalc()" onsubmit="return false">calculate</button>
+                        <button type="submit" class="btn btn-md btn-info" id="solve" onclick="return " onsubmit="return false">calculate</button>
                     </div>
                 </form>
             </div>
@@ -111,7 +111,8 @@
     <!-- jQuery Version 1.11.1 -->
     <script src="js/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
-    <script src="js/calc.js"></script>
+    <script src="js/BMI.js"></script>
+    <script src="js/myDropDown.js"></script>
     <script src="js/animateCSS.js"></script>
   
 
