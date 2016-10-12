@@ -45,7 +45,9 @@ class BMI{
 
 // const ourInfo = new BMI(myUnit, myHeight, myWeight);
 
-// ourInfo.testPrint();
+const ourInfo = new BMI("imperial", 60, 150);
+
+ourInfo.testPrint();
 
 
 //d3 bullet graph library working in conjunction with nv.d3.js
@@ -54,7 +56,7 @@ nv.addGraph(function() {
 
   d3.select('#bulletChart svg')
       .datum(bmiData())
-      .transition().duration(3000)
+      .transition().duration(2000)
       .call(chart);
 
   return chart;
