@@ -58,6 +58,10 @@
     </nav>
 
     <!-- Page Content -->
+    <div class="col=md-4"></div>
+    <div class="col=md-4 text-center"><h6>D3 graph working in conjunction with <a href="http://nvd3.org/">Novus D3.js</a> library</h6></div>
+    <div class="col=md-4"></div>
+
     <div class="container col-md-12 text-center">
 
         <div class="col-md-3"></div>
@@ -66,7 +70,7 @@
                 <div class="text-center">
                     <h4>Select Imperial or Metric units</h4>
                 </div>
-                <div class="dropdown">
+                <div id="dropdown">
                     <select class="btn btn-info btn-lg">
                         <option id="Imperial">Imperial</option>
                         <option id="Metric">Metric</option>
@@ -77,16 +81,16 @@
 
                     <div class="form-group text-center">
                         <label for="exampleInput2">Insert Height</label>
-                        <input type="text" class="form-control text-center" id="total" placeholder="Height">
+                        <input type="text" class="form-control text-center" id="height" placeholder="Height">
                     </div>
 
                      <div class="form-group text-center">
                         <label for="exampleInput2">Insert Weight</label>
-                        <input type="text" class="form-control text-center" id="tax" placeholder="Weight">
+                        <input type="text" class="form-control text-center" id="weight" placeholder="Weight">
                     </div>
 
                      <div class="form-group text-center">
-                        <button type="submit" class="btn btn-md btn-info" id="solve" onclick="return " onsubmit="return false">calculate</button>
+                        <button type="submit" class="btn btn-md btn-info" id="estimate" onclick="return " onsubmit="return false">estimate</button>
                     </div>
                 </form>
             </div>
@@ -102,8 +106,9 @@
 
             <div class="container jumbotron alert alert-info text-center col-md-6 animated fadeInLeft">
                 <div class="text-center">
+                    <h5>Your BMI estimates</h5>
                     <hr class="m-y-2">
-                    <h6 id="bulletChart"><svg height="150" width="475"></svg></h6>
+                    <h6 id="bulletChart" class="text-center"><svg height="150" width="475"></svg></h6>
                 </div>
 
             <div class="col-md-3"></div>

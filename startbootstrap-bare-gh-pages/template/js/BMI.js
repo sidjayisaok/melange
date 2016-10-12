@@ -1,17 +1,60 @@
 //BMI calculator using ES6 and OOP
 class BMI{
-    constructor(country){
-        this.country = country;
-    }
+    constructor(unit, height, weight){
+        this._unit = unit;
+        this._height = height;
+        this._weight = weight;
+        }
+
+        estBMI(BMI){
+            return `${this._unit} | ${this._height} | ${this._weight}`;
+            if(`${this._unit}` === 'metric'){
+                this.BMI = (`${this._weight}`/(Math.pow(`${this._height}`, 2)))*10000;
+                if(this.BMI > 25){
+                    return Math.round(this.BMI);
+                }
+                else if(this.BMI < 18.5){
+                    return Math.round(this.BMI);
+                }
+                else{
+                    return Math.round(this.BMI);
+                }
+            }
+            else{
+                this.BMI = (`${this._weight}`/(Math.pow(`${this._height}`, 2)))*703;
+                if(this.BMI > 25){
+                    return Math.round(this.BMI);
+                }
+                else if(this.BMI < 18.5){
+                    return Math.round(this.BMI);
+                }
+                else{
+                    return Math.round(this.BMI);
+                }
+            }
+        }
+
+        testPrint(){
+            console.log(this.estBMI());
+        }  
 }
 
-//d3 library working in conjunction with nv.d3.js
+// let myUnit = document.getElementById('dropdown').value;
+// let myHeight = document.getElementById('height').value;
+// let myWeight = document.getElementById('weight').value;
+
+// const ourInfo = new BMI(myUnit, myHeight, myWeight);
+
+// ourInfo.testPrint();
+
+
+//d3 bullet graph library working in conjunction with nv.d3.js
 nv.addGraph(function() {  
   var chart = nv.models.bulletChart();
 
   d3.select('#bulletChart svg')
       .datum(bmiData())
-      .transition().duration(1000)
+      .transition().duration(3000)
       .call(chart);
 
   return chart;
@@ -21,7 +64,7 @@ nv.addGraph(function() {
 function bmiData() {
   return {
   	"title":"BMI",
-  	"ranges":[10,22,50],
+  	"ranges":[1,22,50],
   	"measures":[22],
   	"markers":[22]
   };
