@@ -49,13 +49,13 @@ else if(myUnit === "Imperial"){
 
 function logicBMI(myBMI){
           //if you're underweight
-    if(myBMI > 16 && myBMI < 18.5){
+    if(myBMI >= 16 && myBMI < 18.5){
         document.getElementById("solutionA").innerHTML = '<p>Your BMI is estimated to be: ' + myBMI.toFixed(2) + '</p>'; 
         document.getElementById("solutionB").innerHTML = '<p>You are considered to be underweight. For more information, consult the <a href="http://www.nhlbi.nih.gov/health/educational/lose_wt/risk.htm">NIH</a>.</p>';
         return false;
     }
     //if you're overweight
-    else if(myBMI > 25 && myBMI < 29.9){
+    else if(myBMI > 25 && myBMI <= 30){
         document.getElementById("solutionA").innerHTML = '<p>Your BMI is estimated to be: ' + myBMI.toFixed(2) + '</p>'; 
         document.getElementById("solutionB").innerHTML = '<p>You are considered to be overweight. For more information, consult the <a href="http://www.nhlbi.nih.gov/health/educational/lose_wt/risk.htm">NIH</a>.</p>';
         return false;
