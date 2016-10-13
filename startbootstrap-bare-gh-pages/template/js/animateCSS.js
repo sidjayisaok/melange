@@ -4,9 +4,7 @@ $(function(){
 let jelloClass ='animated jello';
 let rubberClass = 'animated rubberBand';
 let tadaClass = 'animated tada';
-let shakeClass ='animated shake';
-let fadeinClass = 'animated fadeInLeft';
-let fadeoutClass = 'animated fadeOutLeft';
+let bounceClass ='animated bounce';
 let endClass ='webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
 //animates list
 $('li').on({
@@ -24,4 +22,19 @@ $('li').on({
  }
 });
 
+//animates button
+$('button').on({
+
+ 'click': ()=>{
+     $('button').addClass(rubberClass).one(endClass, function(){
+         $(this).removeClass(rubberClass);
+     })
+ },
+//this makes them animate when hovering over them via the mouse
+ 'mouseover': ()=>{
+     $('button').addClass(bounceClass).one(endClass, function(){
+         $(this).removeClass(bounceClass);
+     })
+ }
+});
 });
