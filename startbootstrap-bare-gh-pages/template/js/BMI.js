@@ -10,9 +10,10 @@ document.addEventListener("DOMContentLoaded", function(){
         let dropdown = document.getElementById('dropdown');
         let myUnit = dropdown.options[dropdown.selectedIndex].text;
         let myBMI;
-        // console.log(myUnit);
-        // console.log(myWeight);
-        // console.log(myHeight);
+        
+        console.log(myUnit);
+        console.log(myWeight);
+        console.log(myHeight);
 
         return false;
 
@@ -38,8 +39,6 @@ document.addEventListener("DOMContentLoaded", function(){
 	        }
             break;
 
-            return false;
-
             //Imperial conversion
             case "Imperial":
 
@@ -61,15 +60,10 @@ document.addEventListener("DOMContentLoaded", function(){
 	        }
             break;
 
-            return false;
             //error handler
             default:
 		    alert("Please type metric or imperial to continue.");
-
-            return false;
-         }
-         
-     return false;   
+         }   
     }
   
 });
