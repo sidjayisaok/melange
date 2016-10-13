@@ -4,6 +4,24 @@ document.addEventListener("DOMContentLoaded", function(){
  //our variables
 let myBMI;
 
+//display dummy bullet graph
+    nv.addGraph(function(){  
+    var chart = nv.models.bulletChart();
+
+    d3.select('#bulletChart svg')
+        //dummy data
+        .datum({
+          "title":"BMI",
+          "ranges":[1,25,50],
+          "measures": [22],
+          "markers": [22]  
+        })
+        .transition().duration(2000)
+        .call(chart);
+
+    return chart;
+    });
+
 //adds data to our bullet chart
 function bmiData(myBMI) {
     let x = myBMI;
@@ -51,31 +69,31 @@ function logicBMI(myBMI){
           //if you're underweight
     if(myBMI >= 16 && myBMI < 18.5){
         document.getElementById("solutionA").innerHTML = '<p>Your BMI is estimated to be: ' + myBMI.toFixed(2) + '</p>'; 
-        document.getElementById("solutionB").innerHTML = '<p>You are considered to be underweight. For more information, consult the <a href="http://www.nhlbi.nih.gov/health/educational/lose_wt/risk.htm">NIH</a>.</p>';
+        document.getElementById("solutionB").innerHTML = '<p><h6>You are considered to be underweight. For more information, consult the <a href="http://www.nhlbi.nih.gov/health/educational/lose_wt/risk.htm">NIH</a>.</h6></p>';
         return false;
     }
     //if you're overweight
     else if(myBMI > 25 && myBMI <= 30){
         document.getElementById("solutionA").innerHTML = '<p>Your BMI is estimated to be: ' + myBMI.toFixed(2) + '</p>'; 
-        document.getElementById("solutionB").innerHTML = '<p>You are considered to be overweight. For more information, consult the <a href="http://www.nhlbi.nih.gov/health/educational/lose_wt/risk.htm">NIH</a>.</p>';
+        document.getElementById("solutionB").innerHTML = '<p><h6>You are considered to be overweight. For more information, consult the <a href="http://www.nhlbi.nih.gov/health/educational/lose_wt/risk.htm">NIH</a>.</h6></p>';
         return false;
     }
     //if you're obese
     else if(myBMI > 30){
         document.getElementById("solutionA").innerHTML = '<p>Your BMI is estimated to be: ' + myBMI.toFixed(2) + '</p>'; 
-        document.getElementById("solutionB").innerHTML = '<p>You are considered to be obese. Drastic lifestyle changes are recommended. For more information, consult the <a href="http://www.nhlbi.nih.gov/health/educational/lose_wt/risk.htm">NIH</a>.</p>';
+        document.getElementById("solutionB").innerHTML = '<p><h6>You are considered to be obese. Drastic lifestyle changes are recommended. For more information, consult the <a href="http://www.nhlbi.nih.gov/health/educational/lose_wt/risk.htm">NIH</a>.</h6></p>';
         return false;
     }
     //if you're malnourished
     else if(myBMI < 16){
         document.getElementById("solutionA").innerHTML = '<p>Your BMI is estimated to be: ' + myBMI.toFixed(2) + '</p>'; 
-        document.getElementById("solutionB").innerHTML = '<p>You are considered to be malnourished. Drastic lifestyle changes are recommended. For more information, consult the <a href="http://www.nhlbi.nih.gov/health/educational/lose_wt/risk.htm">NIH</a>.</p>';
+        document.getElementById("solutionB").innerHTML = '<p><h6>You are considered to be malnourished. Drastic lifestyle changes are recommended. For more information, consult the <a href="http://www.nhlbi.nih.gov/health/educational/lose_wt/risk.htm">NIH</a>.</h6></p>';
         return false;
     }
     //if you're normal weight
     else{
         document.getElementById("solutionA").innerHTML = '<p>Your BMI is estimated to be: ' + myBMI.toFixed(2) + '</p>'; 
-        document.getElementById("solutionB").innerHTML = '<p>You bodyweight is within normal parameters. For more information, consult the <a href="http://www.nhlbi.nih.gov/health/educational/lose_wt/risk.htm">NIH</a>.</p>';
+        document.getElementById("solutionB").innerHTML = '<p><h6>You bodyweight is within normal parameters. For more information, consult the <a href="http://www.nhlbi.nih.gov/health/educational/lose_wt/risk.htm">NIH</a>.</h6></p>';
         return false;
     }
 }

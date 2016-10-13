@@ -6,7 +6,7 @@
     }
 
    .bar:hover {
-      fill: red;
+      fill: #00f316;
     }
 
     path:hover {

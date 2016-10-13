@@ -1,7 +1,7 @@
 //animate.css jquery controls
 $(function(){
 //variables added to reduce repetition
-let jelloClass ='animated jello';
+let bounceInClass ='animated bounceIn';
 let rubberClass = 'animated rubberBand';
 let tadaClass = 'animated tada';
 let bounceClass ='animated bounce';
@@ -10,8 +10,8 @@ let endClass ='webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend a
 $('li').on({
 
  'click': ()=>{
-     $('li').addClass(jelloClass).one(endClass, function(){
-         $(this).removeClass(jelloClass);
+     $('li').addClass(bounceInClass).one(endClass, function(){
+         $(this).removeClass(bounceInClass);
      })
  },
 //this makes them animate when hovering over them via the mouse
