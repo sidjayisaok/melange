@@ -1,53 +1,78 @@
-//BMI calculator using ES6 and OOP
-class BMI{
-    constructor(unit, height, weight){
-        this._unit = unit;
-        this._height = height;
-        this._weight = weight;
-        }
+//BMI calculator using ES6 and vanilla script
 
-        estBMI(BMI){
-            return `${this._unit} | ${this._height} | ${this._weight}`;
-            if(`${this._unit}` === 'metric'){
-                this.BMI = (`${this._weight}`/(Math.pow(`${this._height}`, 2)))*10000;
-                if(this.BMI > 25){
-                    return Math.round(this.BMI);
-                }
-                else if(this.BMI < 18.5){
-                    return Math.round(this.BMI);
-                }
-                else{
-                    return Math.round(this.BMI);
-                }
-            }
-            else{
-                this.BMI = (`${this._weight}`/(Math.pow(`${this._height}`, 2)))*703;
-                if(this.BMI > 25){
-                    return Math.round(this.BMI);
-                }
-                else if(this.BMI < 18.5){
-                    return Math.round(this.BMI);
-                }
-                else{
-                    return Math.round(this.BMI);
-                }
-            }
-        }
+ //our variables
 
-        testPrint(){
-            console.log(this.estBMI());
-        }  
-}
+document.addEventListener("DOMContentLoaded", function(){
+ 
+    document.getElementById('estimate').onclick = function(){
+        let myHeight = document.getElementById('height').value;
+        let myWeight = document.getElementById('weight').value;
+        let dropdown = document.getElementById('dropdown');
+        let myUnit = dropdown.options[dropdown.selectedIndex].text;
+        let myBMI;
+        // console.log(myUnit);
+        // console.log(myWeight);
+        // console.log(myHeight);
 
-// let myUnit = document.getElementById('dropdown').value;
-// let myHeight = document.getElementById('height').value;
-// let myWeight = document.getElementById('weight').value;
+        return false;
 
-// const ourInfo = new BMI(myUnit, myHeight, myWeight);
+            switch(myUnit){
+             //Metric formula conversion
+             case "Metric":
 
-const ourInfo = new BMI("imperial", 60, 150);
+             console.log(myUnit);
+             console.log(myWeight);
+             console.log(myHeight);
 
-ourInfo.testPrint();
+             myBMI = (myWeight/(Math.pow(myHeight, 2)))*10000;
+             {
+                if(myBMI >= 18.5 && BMI <= 25){
+                    alert("Your BMI is " + Math.round(BMI) + ", You're pretty healthy");
+                }
+                else if(myBMI < 18.5){
+                    alert("Your BMI is " + Math.round(BMI) + ", Your BMI is under by " + (18.5 - Math.round(BMI)));
+                }
+                else if(myBMI > 25){
+                    alert("Your BMI is " + Math.round(BMI) + ", Your BMI is over by " + (Math.round(BMI) - 25));
+                }
+	        }
+            break;
+
+            return false;
+
+            //Imperial conversion
+            case "Imperial":
+
+             console.log(myUnit);
+             console.log(myWeight);
+             console.log(myHeight);
+
+             myBMI = (myWeight/(Math.pow(myHeight, 2)))*703;
+             {
+                if(myBMI >= 18.5 && BMI <= 25){
+                    alert("Your BMI is " + Math.round(BMI) + ", You're pretty healthy");
+                }
+                else if(myBMI < 18.5){
+                    alert("Your BMI is " + Math.round(BMI) + ", Your BMI is under by " + (18.5 - Math.round(BMI)));
+                }
+                else if(myBMI > 25){
+                    alert("Your BMI is " + Math.round(BMI) + ", Your BMI is over by " + (Math.round(BMI) - 25));
+                }
+	        }
+            break;
+
+            return false;
+            //error handler
+            default:
+		    alert("Please type metric or imperial to continue.");
+
+            return false;
+         }
+         
+     return false;   
+    }
+  
+});
 
 
 //d3 bullet graph library working in conjunction with nv.d3.js

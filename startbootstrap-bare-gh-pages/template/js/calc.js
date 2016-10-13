@@ -29,7 +29,7 @@ function pieGraph(total, percent, tax, answer, tip, taxTotal){
                 .attr("width", w)           
                 .attr("height", h)
                 .attr("class", "myTarget")
-                .append("svg:g")                
+                .append("svg:g")           
                 .attr("transform", "translate(" + r + "," + r + ")")
                  
     let arc = d3.svg.arc()              
