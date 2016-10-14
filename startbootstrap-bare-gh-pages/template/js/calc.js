@@ -1,10 +1,10 @@
 //vanilla script demo with es6
 const dummy = 0;
-document.querySelector('#solutionA').innerHTML = '<h6><p>Grand total: $' + dummy + '</p></h6>'; 
-document.querySelector('#solutionB').innerHTML = '<h6><p>Amount split between ' + dummy + ' party members: $' + dummy + '</p></h6>';
-document.querySelector('#solutionC').innerHTML = '<p><svg width="300" height="300" ><circle cx="150" cy="150" r="150" class="myTarget"/></svg></p>';
-document.querySelector('#solutionD').innerHTML = '<h6><p>Total tip is : $' + dummy + '</p></h6>';
-document.querySelector('#solutionE').innerHTML = '<h6><p>Taxes paid is : $' + dummy + '</p></h6>';
+document.querySelector('#solutionA').innerHTML = 'Grand total: $' + dummy; 
+document.querySelector('#solutionB').innerHTML = 'Amount split between ' + dummy + ' party members: $' + dummy;
+document.querySelector('#solutionC').innerHTML = '<svg width="300" height="300" ><circle cx="150" cy="150" r="150" class="myTarget"/></svg>';
+document.querySelector('#solutionD').innerHTML = 'Total tip is : $' + dummy;
+document.querySelector('#solutionE').innerHTML = 'Taxes paid is : $' + dummy;
 
 //our d3 pie chart
 function pieGraph(total, percent, tax, answer, tip, taxTotal){
@@ -96,10 +96,10 @@ function TipCalc(){
         let tip = (answer - total - (.01*tax*total));
         let taxTotal = .01*tax*total;
         //render elements to the page
-        document.getElementById("solutionA").innerHTML = '<p>Grand total: $' + answer.toFixed(2) + '</p>'; 
-        document.getElementById("solutionB").innerHTML = '<p>Amount split between ' + party + ' party members: $' + (answer / party).toFixed(2) + '</p>';
-        document.getElementById("solutionD").innerHTML = '<p>Total tip is : $' + tip.toFixed(2) + '</p>';
-        document.getElementById("solutionE").innerHTML = '<p>Taxes paid is : $' + taxTotal.toFixed(2) + '</p>';
+        document.getElementById("solutionA").innerHTML = 'Grand total: $' + answer.toFixed(2); 
+        document.getElementById("solutionB").innerHTML = 'Amount split between ' + party + ' party members: $' + (answer / party).toFixed(2);
+        document.getElementById("solutionD").innerHTML = 'Total tip is : $' + tip.toFixed(2);
+        document.getElementById("solutionE").innerHTML = 'Taxes paid is : $' + taxTotal.toFixed(2);
         //recursively call pie graph to render it to the page
         pieGraph(total, percent, tax, answer, tip, taxTotal);
         }

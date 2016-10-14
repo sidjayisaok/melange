@@ -7,12 +7,17 @@ $("#convert").on('click', function(){
     let thisCurrency = $('#myCurrency').val();
     let thatCurrency = $('#yourCurrency').val();
     let thisAmount = $('#yourAmount').val();
+    let moment = require('moment');
     //convert to proper format
     let myCurrency = thisCurrency.toUpperCase();
     let yourCurrency = thatCurrency.toUpperCase();
     let yourAmount = parseFloat(thisAmount);
+    let myDate = moment();
+
+    console.log(myDate);
     //API link
     let queryURL = "https://api.fixer.io/latest?base=" + myCurrency + "&rates=" + yourCurrency;
+    let historyURL = "http://api.fixer.io/" + myDate;
     //logic controllers
     if(yourAmount <= 0){
         alert("Please select an amount greater than zero");
