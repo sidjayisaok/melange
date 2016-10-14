@@ -2,6 +2,40 @@
 //api provided using http://fixer.io/
 //exchange rates set by the European Central Bank
 
+//creates a useable date format
+function formatDate(date){
+    var dd = date.getDate();
+    var mm = date.getMonth() + 1;
+    var yyyy = date.getFullYear();
+    if(dd < 10) {dd = '0' + dd}
+    if(mm < 10) {mm = '0' + mm}
+    date = yyyy + '-' + mm + '-' + dd;
+    return date
+ }
+
+
+//pushes it into an array
+function LastTenDays(){
+    let result = [];
+    for (let i = 0; i < 10; i++) {
+        let d = new Date();
+        d.setDate(d.getDate() - i);
+        result.push( formatDate(d) )
+    }
+    return(result);
+ }
+
+//returns dates
+function loopDate(){
+  let getMyDate = LastTenDays();
+  let myArray = [];
+
+for (i = 0; i < getMyDate.length; i++){
+	myArray.push("https://api.fixer.io/" + getMyDate[i]);
+}
+return(myArray);
+}
+
 $("#convert").on('click', function(){
     //our basic variables
     let thisCurrency = $('#myCurrency').val();
@@ -11,6 +45,9 @@ $("#convert").on('click', function(){
     let myCurrency = thisCurrency.toUpperCase();
     let yourCurrency = thatCurrency.toUpperCase();
     let yourAmount = parseFloat(thisAmount);
+    let myDate = loopDate();
+
+    console.log(myDate);
 
     //API link
     let queryURL = "https://api.fixer.io/latest?base=" + myCurrency + "&rates=" + yourCurrency;

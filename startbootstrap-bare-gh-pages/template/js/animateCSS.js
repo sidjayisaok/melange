@@ -5,6 +5,8 @@ let bounceInClass ='animated bounceIn';
 let rubberClass = 'animated rubberBand';
 let tadaClass = 'animated tada';
 let bounceClass ='animated bounce';
+let shakeClass = 'animated shake';
+let bounceOutUpClass = 'animated bounceOutUp';
 let endClass ='webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
 //animates list
 $('li').on({
@@ -37,4 +39,5 @@ $('button').on({
      })
  }
 });
+
 });
