@@ -17,7 +17,8 @@ function pieGraph(total, percent, tax, answer, tip, taxTotal){
 
         color = d3.scale.category20c();
         //my data fields    
-        data = [{"label":"pre-total", "value": (total/answer)},
+        data = [
+                {"label":"pre-total", "value": (total/answer)},
                 {"label":"tip", "value": (tip/answer)},
                 {"label":"tax", "value": (taxTotal/answer)}
                ];
@@ -54,20 +55,7 @@ function pieGraph(total, percent, tax, answer, tip, taxTotal){
             })
             .attr("text-anchor", "middle")
             .style("fill", "#335533")
-            .on("mouseover", function (d) {
-                    d3.select("#tooltip")
-                        .style("left", d3.event.pageX + "px")
-                        .style("top", d3.event.pageY + "px")
-                        .style("opacity", 1)
-                        .select("#value")
-                        .text(d.value);
-                  })
-                    .on("mouseout", function () {
-                    // Hide the tooltip
-                    d3.select("#tooltip")
-                        .style("opacity", 0);
-                    })
-            .text((d, i)=> { return data[i].label; });
+            .text((d, i)=> {return data[i].label + ": " + data[i].value.toFixed(3)*100;});
 }        
 
 //our calculator function
