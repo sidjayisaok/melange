@@ -30,7 +30,6 @@ $("#convert").on('click', function(){
         url: queryURL,
         datatype: 'json'
     }).done(function(res){
-        console.log(res);
         $(".currentDate").html(" Rates current as of " + res.date);
         $(".myConversion").html(" You have selected " + res.base);
         $(".myRatio").html(" The current ratio is 1 " + res.base + " to " + res.rates[yourCurrency] + " " + yourCurrency);
