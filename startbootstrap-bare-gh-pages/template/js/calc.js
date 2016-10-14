@@ -55,7 +55,7 @@ function pieGraph(total, percent, tax, answer, tip, taxTotal){
             })
             .attr("text-anchor", "middle")
             .style("fill", "#335533")
-            .text((d, i)=> {return data[i].label + ": " + data[i].value.toFixed(3)*100;});
+            .text((d, i)=> {return data[i].label + ": " + data[i].value.toFixed(2)*100;});
 }        
 
 //our calculator function
