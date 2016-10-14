@@ -17,11 +17,11 @@ $("#convert").on('click', function(){
     // let historyURL = "http://api.fixer.io/" + myDate;
     //logic controllers
     if(yourAmount <= 0){
-        alert("Please select an amount greater than zero");
+        alertify.alert("Please select an amount greater than zero");
         return;
     }
     else if(isNaN(yourAmount)){
-        alert("Please use numbers for the amount field only");
+        alertify.alert("Please use numbers for the amount field only");
         return;
     }
     //API call

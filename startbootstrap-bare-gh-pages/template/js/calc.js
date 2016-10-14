@@ -84,11 +84,11 @@ function TipCalc(){
     let percent = parseFloat(myPercent); 
         //basic logic for calculator
         if((party === 0) || (total === 0) || (tax === 0) || (percent === 0)){
-            alert("please enter a number greater than zero");
+            alertify.alert("please enter a number greater than zero");
             return false;
         }
         else if((isNaN(party)) || (isNaN(total)) || (isNaN(tax)) || (isNaN(percent))){
-            alert("You must enter numbers only");
+            alertify.alert("You must enter numbers only");
             return false;
         }
         else{

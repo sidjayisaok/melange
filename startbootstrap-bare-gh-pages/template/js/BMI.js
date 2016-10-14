@@ -42,12 +42,12 @@ let myUnit = dropdown.options[dropdown.selectedIndex].text;
 
 //basic conditional logic
 if(myHeight <= 0 || myWeight <= 0){
-    alert("please enter a number larger than zero");
+    alertify.alert("please enter a number larger than zero");
     return false;
 }
 
 else if(isNaN(myHeight) || isNaN(myWeight)){
-    alert("Please use numbers only");
+    alertify.alert("Please use numbers only");
     return false;
 }
 
