@@ -13,8 +13,7 @@ function formatDate(date){
     return date
  }
 
-
-//pushes it into an array
+//pushes date into an array
 function LastTenDays(){
     let result = [];
     for (let i = 0; i < 10; i++) {
@@ -25,15 +24,15 @@ function LastTenDays(){
     return(result);
  }
 
-//returns dates
+//returns dates as useable array
 function loopDate(){
   let getMyDate = LastTenDays();
   let myArray = [];
 
-for (i = 0; i < getMyDate.length; i++){
-	myArray.push("https://api.fixer.io/" + getMyDate[i]);
-}
-return(myArray);
+    for (i = 0; i < getMyDate.length; i++){
+        myArray.push("https://api.fixer.io/" + getMyDate[i]);
+    }
+    return(myArray);
 }
 
 $("#convert").on('click', function(){
@@ -45,13 +44,14 @@ $("#convert").on('click', function(){
     let myCurrency = thisCurrency.toUpperCase();
     let yourCurrency = thatCurrency.toUpperCase();
     let yourAmount = parseFloat(thisAmount);
+    let myDays = LastTenDays();
     let myDate = loopDate();
 
     console.log(myDate);
 
     //API link
     let queryURL = "https://api.fixer.io/latest?base=" + myCurrency + "&rates=" + yourCurrency;
-    // let historyURL = "http://api.fixer.io/" + myDate;
+    let historyURL = "https://api.fixer.io/" + myDays[i] + "base=" + yourCurrency;
     //logic controllers
     if(yourAmount <= 0){
         alertify.alert("Please select an amount greater than zero");
@@ -59,6 +59,10 @@ $("#convert").on('click', function(){
     }
     else if(isNaN(yourAmount)){
         alertify.alert("Please use numbers for the amount field only");
+        return;
+    }
+    else if(!isNaN(myCurrency) || !isNaN(yourCurrency)){
+        alertify.alert("Please use the three digit characters for the currency fields only");
         return;
     }
     //API call
@@ -72,6 +76,15 @@ $("#convert").on('click', function(){
         $(".myRatio").html(" The current ratio is 1 " + res.base + " to " + res.rates[yourCurrency] + " " + yourCurrency);
         $(".yourConversion").html(" Converting " + yourAmount + " " + myCurrency + " is worth approximately " + (res.rates[yourCurrency]*yourAmount).toFixed(2) + " " + yourCurrency);
     })
+    return false;
+    //History call
+          $.ajax({
+                method: 'GET',
+                url: myDate[i],
+                datatype: 'json'
+            }).done(function(response){
+                console.log(response);
+            })
     return false;
 });
 
