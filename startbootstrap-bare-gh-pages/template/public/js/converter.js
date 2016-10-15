@@ -51,7 +51,7 @@ $("#convert").on('click', function(event){
 
     //API link
     let queryURL = "https://api.fixer.io/latest?base=" + myCurrency + "&rates=" + yourCurrency;
-    let historyURL = myDate[i] + "?base=" + yourCurrency;
+    // let historyURL = ;
     
     //logic controllers
     if(yourAmount <= 0){
@@ -78,14 +78,21 @@ $("#convert").on('click', function(event){
         $(".yourConversion").html(" Converting " + yourAmount + " " + myCurrency + " is worth approximately " + (res.rates[yourCurrency]*yourAmount).toFixed(2) + " " + yourCurrency);
     });
     //History call
+    const loopAJAX = ()=>{
+        for (i = 0; i < myDate.length; i++){
+            $.ajax({
+                method: 'GET',
+                url: myDate[i] + "?base=" + myCurrency,
+                datatype: 'json',
+                async: false
+            }).done(function(response){
+                console.log(response);
+            })
+        }   
+    }
 
-    $.ajax({
-        method: 'GET',
-        url: historyURL,
-        datatype: 'json'
-    }).done(function(response){
-        console.log(response);
-    })
+loopAJAX();
+   
 });
 
 //our barchart variables
