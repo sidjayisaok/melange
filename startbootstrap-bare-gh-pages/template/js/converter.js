@@ -3,18 +3,18 @@
 //exchange rates set by the European Central Bank
 
 //creates a useable date format
-const formatDate = (date)=>{
-    let dd = date.getDate();
-    let mm = date.getMonth() + 1;
-    let yyyy = date.getFullYear();
+function formatDate(date){
+    var dd = date.getDate();
+    var mm = date.getMonth() + 1;
+    var yyyy = date.getFullYear();
     if(dd < 10) {dd = '0' + dd}
     if(mm < 10) {mm = '0' + mm}
     date = yyyy + '-' + mm + '-' + dd;
-    return date;
+    return date
  }
 
 //pushes date into an array
-const LastTenDays = ()=> {
+function LastTenDays(){
     let result = [];
     for (let i = 0; i < 10; i++) {
         let d = new Date();
@@ -25,7 +25,7 @@ const LastTenDays = ()=> {
  }
 
 //returns dates as useable array
-const loopDate = ()=> {
+function loopDate(){
   let getMyDate = LastTenDays();
   let myArray = [];
 
@@ -35,8 +35,7 @@ const loopDate = ()=> {
     return(myArray);
 }
 
-$("#convert").on('click', function(event){
-    event.preventDefault();
+$("#convert").on('click', function(){
     //our basic variables
     let thisCurrency = $('#myCurrency').val();
     let thatCurrency = $('#yourCurrency').val();
@@ -45,13 +44,28 @@ $("#convert").on('click', function(event){
     let myCurrency = thisCurrency.toUpperCase();
     let yourCurrency = thatCurrency.toUpperCase();
     let yourAmount = parseFloat(thisAmount);
+    let myDays = LastTenDays();
     let myDate = loopDate();
 
     console.log(myDate);
 
     //API link
     let queryURL = "https://api.fixer.io/latest?base=" + myCurrency + "&rates=" + yourCurrency;
-    let historyURL = myDate[i] + "?base=" + yourCurrency;
+    
+    function getURLs(i){
+        let historyURL = myDate[i] + "?base=" + yourCurrency;
+
+        $.ajax({
+            method: 'GET',
+            url: historyURL,
+            datatype: 'json'
+         })
+    }
+    
+    
+    
+    
+
     
     //logic controllers
     if(yourAmount <= 0){
@@ -76,16 +90,14 @@ $("#convert").on('click', function(event){
         $(".myConversion").html(" You have selected " + res.base);
         $(".myRatio").html(" The current ratio is 1 " + res.base + " to " + res.rates[yourCurrency] + " " + yourCurrency);
         $(".yourConversion").html(" Converting " + yourAmount + " " + myCurrency + " is worth approximately " + (res.rates[yourCurrency]*yourAmount).toFixed(2) + " " + yourCurrency);
-    });
+    })
+    return false;
     //History call
-
-    $.ajax({
-        method: 'GET',
-        url: historyURL,
-        datatype: 'json'
-    }).done(function(response){
+    
+    .done(function(response){
         console.log(response);
     })
+    return false;
 });
 
 //our barchart variables

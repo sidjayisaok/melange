@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+// app.use(favicon(__dirname + '/public/favicon.ico'));
 
 //basic get request for home page
 app.get('/', function(req, res){

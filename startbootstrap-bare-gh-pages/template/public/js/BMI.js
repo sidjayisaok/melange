@@ -23,7 +23,7 @@ let myBMI;
     });
 
 //adds data to our bullet chart
-function bmiData(myBMI) {
+const bmiData = (myBMI)=> {
     let x = myBMI;
   return {
   	"title":"BMI",
@@ -65,7 +65,7 @@ else if(myUnit === "Imperial"){
 }
 }
 
-function logicBMI(myBMI){
+const logicBMI = (myBMI)=>{
           //if you're underweight
     if(myBMI >= 16 && myBMI < 18.5){
         document.getElementById("solutionA").innerHTML = '<p>Your BMI is estimated to be: ' + myBMI.toFixed(2) + '</p>'; 
@@ -99,7 +99,7 @@ function logicBMI(myBMI){
 }
 
 //render the bullet graph to the page
-function bulletGraph(myBMI){
+const bulletGraph = (myBMI)=>{
 //d3 bullet graph library working in conjunction with nv.d3.js
     nv.addGraph(function(){  
     var chart = nv.models.bulletChart();

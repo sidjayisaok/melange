@@ -7,7 +7,7 @@ document.querySelector('#solutionD').innerHTML = 'Total tip is : $' + dummy;
 document.querySelector('#solutionE').innerHTML = 'Taxes paid is : $' + dummy;
 
 //our d3 pie chart
-function pieGraph(total, percent, tax, answer, tip, taxTotal){
+const pieGraph = (total, percent, tax, answer, tip, taxTotal)=>{
     //remove duplicates
     d3.select("svg").remove();
     //set up pie graph
@@ -59,7 +59,7 @@ function pieGraph(total, percent, tax, answer, tip, taxTotal){
 }        
 
 //our calculator function
-function TipCalc(){
+const TipCalc = ()=>{
     //varibales
     let myParty = document.getElementById('party').value;
     let myTotal =document.getElementById('total').value;
