@@ -28,7 +28,7 @@ const LastTenDays = ()=> {
 const loopDate = ()=> {
   let getMyDate = LastTenDays();
   let myArray = [];
-
+  let copied = getMyDate.map((dString)=> "https://api.fixer.io/".concat(dString));
     for (i = 0; i < getMyDate.length; i++){
         myArray.push("https://api.fixer.io/" + getMyDate[i]);
     }
@@ -77,8 +77,20 @@ $("#convert").on('click', function(event){
         $(".myRatio").html(" The current ratio is 1 " + res.base + " to " + res.rates[yourCurrency] + " " + yourCurrency);
         $(".yourConversion").html(" Converting " + yourAmount + " " + myCurrency + " is worth approximately " + (res.rates[yourCurrency]*yourAmount).toFixed(2) + " " + yourCurrency);
     });
-    //History call
+
+    //this function removes duplicates
+    const deDuped = (resArray)=>{
+        let dateArray = resArray.map((res)=>res.date);
+        let dateSet = new Set();
+        dateArray.forEach((date)=> dateSet.add(date));
+        let noRepeat = [...dateSet]
+                        .map((d)=>resArray
+                        .find((r)=> r.date === d));
+        return noRepeat;
+}
+    //History call for the second API
     const loopAJAX = ()=>{
+         let newArray = [];
         for (i = 0; i < myDate.length; i++){
             $.ajax({
                 method: 'GET',
@@ -86,14 +98,17 @@ $("#convert").on('click', function(event){
                 datatype: 'json',
                 async: false
             }).done(function(response){
-                console.log(response);
+               newArray.push(response);
+               console.log(deDuped(newArray));
             })
-        }   
-    }
+        }       
+
+    }   
 
 loopAJAX();
    
 });
+
 
 //our barchart variables
 let svg = d3.select("svg"),
