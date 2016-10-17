@@ -5,7 +5,7 @@ let bounceInClass ='animated bounceIn';
 let rubberClass = 'animated rubberBand';
 let tadaClass = 'animated tada';
 let bounceClass ='animated bounce';
-let shakeClass = 'animated shake';
+let flipClass = 'animated hinge';
 let bounceOutUpClass = 'animated bounceOutUp';
 let endClass ='webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
 //animates list
@@ -36,6 +36,22 @@ $('button').on({
  'mouseover': ()=>{
      $('button').addClass(bounceClass).one(endClass, function(){
          $(this).removeClass(bounceClass);
+     })
+ }
+});
+
+//animates links
+$('.flipThis').on({
+
+ 'click': ()=>{
+     $('.flipThis').addClass(flipClass).one(endClass, function(){
+         $(this).removeClass(flipClass);
+     })
+ },
+//this makes them animate when hovering over them via the mouse
+ 'mouseover': ()=>{
+     $('.flipThis').addClass(bounceOutUpClass).one(endClass, function(){
+         $(this).removeClass(bounceOutUpClass);
      })
  }
 });

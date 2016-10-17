@@ -32,6 +32,11 @@ app.get('/currency', function(req, res){
   res.sendFile(__dirname + '/public/currency.html');
 });
 
+//basic get request for BMI calculator page
+app.get('/d3Maps', function(req, res){
+  res.sendFile(__dirname + '/public/d3Maps.html');
+});
+
 //fire up the server
 app.listen(Port, function(){
   console.log('Jet Set Radio broadcasting on channel ' + Port)

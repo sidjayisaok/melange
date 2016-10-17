@@ -35,6 +35,54 @@ const loopDate = ()=> {
     return(myArray);
 }
 
+//attempting to display line graph history
+const showGraph = (thisData)=>{
+  nv.addGraph(function(){
+  var chart = nv.models.lineChart()
+                .margin({left: 100})  
+                .useInteractiveGuideline(true)  
+                .transitionDuration(2000)  
+                .showLegend(true)       
+                .showYAxis(true)        
+                .showXAxis(true);
+
+  chart.xAxis
+       .axisLabel('Date')
+       .tickFormat(d3.format(',r'));
+
+  chart.yAxis     
+       .axisLabel('Value')
+       .tickFormat(d3.format('.02f'));
+
+  
+  var myData = thisData;
+
+  d3.select('#barChart svg')       
+    .datum(myData)         
+    .call(chart);          
+
+  nv.utils.windowResize(function() {chart.update()});
+  return chart;
+});
+}
+
+//function to grab the final results in the ajax history call
+const finalResults = (xData, yData)=> {
+  let forecast = [];
+  for (let i = 0; i < xData.length; i++) {
+    forecast.push({x: "xData", y: "yData" });
+  }
+  //Line chart data should be sent as an array of series objects.
+  return [
+    {      
+      key: 'Forecast', 
+      color: '#7fff0e',
+      area: true,
+      values: forecast
+    }
+  ];
+}
+
 $("#convert").on('click', function(event){
     event.preventDefault();
     //our basic variables
@@ -46,8 +94,6 @@ $("#convert").on('click', function(event){
     let yourCurrency = thatCurrency.toUpperCase();
     let yourAmount = parseFloat(thisAmount);
     let myDate = loopDate();
-
-    console.log(myDate);
 
     //API link
     let queryURL = "https://api.fixer.io/latest?base=" + myCurrency + "&rates=" + yourCurrency;
@@ -90,7 +136,8 @@ $("#convert").on('click', function(event){
 }
     //History call for the second API
     const loopAJAX = ()=>{
-         let newArray = [];
+         let newArrayY = [];
+         let newArrayX = [];
         for (i = 0; i < myDate.length; i++){
             $.ajax({
                 method: 'GET',
@@ -98,19 +145,27 @@ $("#convert").on('click', function(event){
                 datatype: 'json',
                 async: false
             }).done(function(response){
-               newArray.push(response);
-               console.log(deDuped(newArray));
+                newArrayY.push(response.rates[yourCurrency]);
+                newArrayX.push(response.date);
+                console.log(newArrayY);
+                console.log(newArrayX);
+                showGraph(finalResults(newArrayX, newArrayY));
+            //     let finalArray = deDuped(newArray);
+            //    newArray.push(response.rates[yourCurrency]);
+            //    console.log(finalArray);
             })
         }       
 
     }   
 
 loopAJAX();
+
    
 });
 
 
-//our barchart variables
+const mybarChart = (ourData)=>{
+    //our barchart variables
 let svg = d3.select("svg"),
 margin = {top: 20, right: 20, bottom: 30, left: 40},
 width = +svg.attr("width") - margin.left - margin.right,
@@ -122,7 +177,7 @@ let x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
 let g = svg.append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 //data using csv file
-d3.csv("/misc/data.csv", (d)=> {
+d3.csv(ourData, (d)=> {
   d.frequency = +d.frequency;
   return d;
 }, function(error, data) {
@@ -156,5 +211,11 @@ d3.csv("/misc/data.csv", (d)=> {
     .attr("fill", "green")
     .attr("height", (d)=> { return height - y(d.frequency); });
 });
+}
+//display bar chart template
+mybarChart("/misc/data.csv");
+
+
+
 
 
