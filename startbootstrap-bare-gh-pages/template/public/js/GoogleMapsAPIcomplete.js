@@ -10,7 +10,7 @@ function initMap() {
   var searchResults = {lat: 40.7128, lng: -74.0059};
   map = new google.maps.Map(document.getElementById('map'), {
     center: searchResults,
-    zoom: 10
+    zoom: 13
   });
   //sets up info window
   infowindow = new google.maps.InfoWindow();
