@@ -25,19 +25,23 @@ function initMap() {
 }
 //pulls up markers
 function callback(results, status) {
+  //array to log ratings API
+  let thisArray = [];
   if (status === google.maps.places.PlacesServiceStatus.OK) {
     for (var i = 0; i < results.length; i++) {
       createMarker(results[i]);
       //rating api here
-      console.log(results[i].rating);
+      thisArray.push(results[i].rating);
     }
   }
+  //render bar chart results
+   myBarChart(thisArray);
 }
 //creates markers
 function createMarker(place) {
   var marker;
-  //don't change this url or so help me God..."https://i.imgur.com/beAXMxQ.png" ourIcon only supports urls
-  var ourIcon = new google.maps.MarkerImage("https://i.imgur.com/beAXMxQ.png");
+  // ourIcon only supports urls
+  var ourIcon = new google.maps.MarkerImage("https://i.imgur.com/ibZvcOY.png");
 
   if(marker != undefined && marker != ''){
     marker.setMap(null);
@@ -88,57 +92,48 @@ function createMarker(place) {
       }
     });
   }
-//attempting to add d3 markers
-function addD3markers(markers){
-  var overlay = new google.maps.OverlayView();
+//d3 graph render
+const myBarChart = (thisArray)=>{
+  //delete duplicates
+for (let i = 0; i < thisArray.length; i++){
+   d3.select(".myChart").remove();
+}
+  //works with chart below
+  let x = d3.scale.linear()
+          .domain([0, d3.max(thisArray)])
+          .range([0, 420]);
 
-        // Add the container when the overlay is added to the map.
-        overlay.onAdd = function() {
-            var layer = d3.select(this.getPanes().overlayLayer).append("div")
-                .attr("class", "stations");
-
-            overlay.draw = function() {
-                var projection = this.getProjection(),
-                    padding = 20;
-
-                var marker = layer.selectAll("svg")
-                    .data(d3.entries(markers))
-                    .each(transform) // update existing markers
+  let barChart =  d3.select(".chart")
+                    .selectAll(".chart")
+                    .data(thisArray)
                     .enter()
-                    .append("svg:svg")
-                    .each(transform)
-                    .attr("class", "marker");
-
-                // Add a circle.
-                marker.append("svg:circle")
-                    .attr("r", 11)
-                    .attr("cx", padding)
-                    .attr("cy", padding);
-
-                // Add a label.
-                marker.append("svg:text")
-                    .attr("x", padding)
-                    .attr("y", padding)
-                    .attr("dy", ".31em")
-                    //Center label in the circle.
-                    .attr("text-anchor", "middle")
-                    .text(function(d) {
-                        return d.key;
-                    });
-
-                function transform(d) {
-                    d = new google.maps.LatLng(d.value[1], d.value[0]);
-                    d = projection.fromLatLngToDivPixel(d);
-                    return d3.select(this)
-                        .style("left", (d.x - padding) + "px")
-                        .style("top", (d.y - padding) + "px");
-                }
-            };
-        };
-        // Bind our overlay to the map…
-        overlay.setMap(map);
+                    .append("div")
+                    .style("width", (d)=>{
+                      return x(d) + "px";
+                    })
+                    .style("background-color", (d)=>{
+                      if (d < 1) {
+                        return "red";
+                      }
+                      else if (d > 1 && d < 2){
+                        return "orange";
+                      }
+                      else if(d > 2 && d < 3){
+                        return "yellow";
+                      }
+                      else if(d > 3 && d < 4){
+                        return "teal";
+                      }
+                      else{
+                        return "green";
+                      }
+                    })
+                    .style("color", "white")
+                    .attr("class", "myChart")
+                    .text((d)=>{
+                      return d;
+                });
 }
 
-console.log(addD3markers(callback()));
 
   

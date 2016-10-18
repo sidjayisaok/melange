@@ -67,31 +67,37 @@
 
   <div><br /><br /><br /></div>
 
-    <div class="col-md-3"></div>
-
-    <div class="text-center container jumbotron alert alert-info col-md-6 animated fadeInDown">
-       <hr class="m-y-2">
-       <div class="alert alert-warning">
-        <h5>Roulette search</h5>
+    <div class="col-md-2"></div>
+    <div class="text-center container col-md-8 animated fadeInDown">
+       <div class="alert alert-info">
+        <h5>Restaurant ratings search</h5>
+        <hr class="m-y-2">
         <i class="fa fa-map" aria-hidden="true"></i>
         <input type="text" id="address-input"> 
         <i class="fa fa-map" aria-hidden="true"></i>
+        <button class="btn btn-sm btn-info" onclick="searchFunc();">search</button>
        </div>
        <hr class="m-y-2">
-       <button class="btn btn-sm btn-info" onclick="searchFunc();">search</button>
     </div>
+    <div class="col-md-2"></div>
 
-    <div class="col-md-3"></div>
-
-    <div id="map" class="text-center container animated fadeInUp"></div>
 
     <div class="col-md-4"></div>
-
-    <div class="col-md-4 text-center animated fadeInUp">
+    <div class="col-md-4 text-center animated fadeInDown">
         <h6><p>SDK via Google</p></h6>
     </div>
-
     <div class="col-md-4"></div>
+
+
+
+    <div class="col-md-1"></div>
+    <div id="map" class="text-center container col-md-4"></div>
+    <div class="col-md-1"></div>
+     <div class="text-center container jumbotron alert alert-info chart animated fadeInright col-md-4">
+        <h6>Ratings result via Google/Zagat</h6>
+        <hr class="m-y-2">
+    </div>
+    <div class="col-md-2"></div>
 
 
     <!-- jQuery Version 1.11.1 -->
