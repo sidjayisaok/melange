@@ -35,36 +35,44 @@ const loopDate = ()=> {
     return(myArray);
 }
 
-//attempting to display line graph history
+//attempting to display graph history via nv.d3.js
 const showGraph = (thisData)=>{
-  nv.addGraph(function(){
-  var chart = nv.models.lineChart()
-                .margin({left: 100})  
-                .useInteractiveGuideline(true)  
-                .transitionDuration(2000)  
-                .showLegend(true)       
-                .showYAxis(true)        
-                .showXAxis(true);
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart()
+      .transitionDuration(1000)
+      .reduceXTicks(true)   //If 'false', every single x-axis tick label will be rendered.
+      .rotateLabels(0)      //Angle to rotate x-axis labels.
+      .showControls(true)   //Allow user to switch between 'Grouped' and 'Stacked' mode.
+      .groupSpacing(0.1)    //Distance between each group of bars.
+    ;
 
-  chart.xAxis
-       .axisLabel('Date')
-       .tickFormat(d3.format(',r'));
+    chart.xAxis
+        .tickFormat(d3.format(',f'));
 
-  chart.yAxis     
-       .axisLabel('Value')
-       .tickFormat(d3.format('.02f'));
+    chart.yAxis
+        .tickFormat(d3.format(',.1f'));
 
-  
-  var myData = thisData;
+    d3.select('svg')
+        .datum(exampleData(thisData))
+        .call(chart);
 
-  d3.select('#barChart svg')       
-    .datum(myData)         
-    .call(chart);          
+    nv.utils.windowResize(chart.update);
 
-  nv.utils.windowResize(function() {chart.update()});
-  return chart;
+    return chart;
 });
+
+const exampleData = (thisData)=> {
+  return thisData.map(function(data, i) {
+    return {
+      key: 'Stream #' + i,
+      values: data
+    };
+  });
 }
+
+}
+
+
 
 //function to grab the final results in the ajax history call
 const finalResults = (xData, yData)=> {
@@ -72,15 +80,16 @@ const finalResults = (xData, yData)=> {
   for (let i = 0; i < xData.length; i++) {
     forecast.push({x: "xData", y: "yData" });
   }
-  //Line chart data should be sent as an array of series objects.
-  return [
-    {      
-      key: 'Forecast', 
-      color: '#7fff0e',
-      area: true,
-      values: forecast
-    }
-  ];
+  console.log(forecast);
+//   //Line chart data should be sent as an array of series objects.
+//   return [
+//     {      
+//       key: 'Forecast', 
+//       color: '#7fff0e',
+//       area: true,
+//       values: forecast
+//     }
+//   ];
 }
 
 $("#convert").on('click', function(event){
@@ -147,9 +156,9 @@ $("#convert").on('click', function(event){
             }).done(function(response){
                 newArrayY.push(response.rates[yourCurrency]);
                 newArrayX.push(response.date);
-                console.log(newArrayY);
-                console.log(newArrayX);
-                showGraph(finalResults(newArrayX, newArrayY));
+                // console.log(newArrayY);
+                // console.log(newArrayX);
+                showGraph(newArrayY);
             //     let finalArray = deDuped(newArray);
             //    newArray.push(response.rates[yourCurrency]);
             //    console.log(finalArray);

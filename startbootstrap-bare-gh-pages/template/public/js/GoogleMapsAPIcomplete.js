@@ -1,6 +1,7 @@
 // This example requires the Places library. Include the libraries=places
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+//don't use es6 or it'll break the code
 
 //variables used
 var map;
@@ -27,13 +28,15 @@ function callback(results, status) {
   if (status === google.maps.places.PlacesServiceStatus.OK) {
     for (var i = 0; i < results.length; i++) {
       createMarker(results[i]);
+      //rating api here
+      console.log(results[i].rating);
     }
   }
 }
 //creates markers
 function createMarker(place) {
   var marker;
-  //don't change this url or so help me God...
+  //don't change this url or so help me God..."https://i.imgur.com/beAXMxQ.png" ourIcon only supports urls
   var ourIcon = new google.maps.MarkerImage("https://i.imgur.com/beAXMxQ.png");
 
   if(marker != undefined && marker != ''){
@@ -48,12 +51,14 @@ function createMarker(place) {
     animation: google.maps.Animation.DROP,
     icon: ourIcon
   });
+  
   //listener event can be rewritten but leave it as is for now
   google.maps.event.addListener(marker, 'click', function() {
     infowindow.setContent(place.name);
     infowindow.open(map, this);
   });
   }
+
   // trying to implement search, this is pulling up the latitude and longitude
   //figure out how to change the latitude and longitude into search factors
   function searchFunc(){
@@ -78,8 +83,62 @@ function createMarker(place) {
         location: searchResults,
         radius: 1000,
         // change the types using https://developers.google.com/places/supported_types as a reference
-        type: ['store']
+        type: ['restaurant']
       }, callback);
       }
     });
   }
+//attempting to add d3 markers
+function addD3markers(markers){
+  var overlay = new google.maps.OverlayView();
+
+        // Add the container when the overlay is added to the map.
+        overlay.onAdd = function() {
+            var layer = d3.select(this.getPanes().overlayLayer).append("div")
+                .attr("class", "stations");
+
+            overlay.draw = function() {
+                var projection = this.getProjection(),
+                    padding = 20;
+
+                var marker = layer.selectAll("svg")
+                    .data(d3.entries(markers))
+                    .each(transform) // update existing markers
+                    .enter()
+                    .append("svg:svg")
+                    .each(transform)
+                    .attr("class", "marker");
+
+                // Add a circle.
+                marker.append("svg:circle")
+                    .attr("r", 11)
+                    .attr("cx", padding)
+                    .attr("cy", padding);
+
+                // Add a label.
+                marker.append("svg:text")
+                    .attr("x", padding)
+                    .attr("y", padding)
+                    .attr("dy", ".31em")
+                    //Center label in the circle.
+                    .attr("text-anchor", "middle")
+                    .text(function(d) {
+                        return d.key;
+                    });
+
+                function transform(d) {
+                    d = new google.maps.LatLng(d.value[1], d.value[0]);
+                    d = projection.fromLatLngToDivPixel(d);
+                    return d3.select(this)
+                        .style("left", (d.x - padding) + "px")
+                        .style("top", (d.y - padding) + "px");
+                }
+            };
+        };
+        // Bind our overlay to the map…
+        overlay.setMap(map);
+}
+
+console.log(addD3markers(callback()));
+
+  
