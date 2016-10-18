@@ -94,7 +94,7 @@ function createMarker(place) {
   }
 //d3 graph render
 const myBarChart = (thisArray)=>{
-  //delete duplicates
+//delete duplicates
 for (let i = 0; i < thisArray.length; i++){
    d3.select(".myChart").remove();
 }

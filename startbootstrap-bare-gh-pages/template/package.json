@@ -1,8 +1,8 @@
 {
-  "name": "survey",
+  "name": "Melange",
   "version": "0.0.0",
-  "description": "class survey",
-  "main": "myServer.js",
+  "description": "Final Project using d3.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,5 +13,8 @@
     "express": "~4.14.0",
     "mongojs": "~2.4.0",
     "serve-favicon": "^2.3.0"
+  },
+  "engines": {
+    "node": "4.4.4"
   }
 }
