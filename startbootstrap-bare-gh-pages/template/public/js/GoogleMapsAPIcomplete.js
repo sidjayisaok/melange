@@ -115,13 +115,13 @@ for (let i = 0; i < thisArray.length; i++){
                       if (d < 1) {
                         return "red";
                       }
-                      else if (d > 1 && d < 2){
+                      else if (d >= 1 && d < 2){
                         return "orange";
                       }
-                      else if(d > 2 && d < 3){
+                      else if(d >= 2 && d < 3){
                         return "yellow";
                       }
-                      else if(d > 3 && d < 4){
+                      else if(d >= 3 && d < 4){
                         return "teal";
                       }
                       else{
