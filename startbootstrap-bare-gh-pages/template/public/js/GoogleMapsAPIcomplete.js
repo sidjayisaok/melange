@@ -18,7 +18,7 @@ function initMap() {
   var service = new google.maps.places.PlacesService(map);
   service.nearbySearch({
     location: searchResults,
-    radius: 1000,
+    radius: 2500,
     // change the types using https://developers.google.com/places/supported_types as a reference
     type: ['restaurant']
   }, callback);
@@ -85,7 +85,7 @@ function createMarker(place) {
       var service = new google.maps.places.PlacesService(map);
       service.nearbySearch({
         location: searchResults,
-        radius: 1000,
+        radius: 2500,
         // change the types using https://developers.google.com/places/supported_types as a reference
         type: ['restaurant']
       }, callback);
