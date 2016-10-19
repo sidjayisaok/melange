@@ -9,6 +9,17 @@
         padding: 0; 
     }
 
+    body:before{
+        background-image: url("../misc/repeatBG.jpg");
+        content: "";
+        height: 150%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: .05;
+    }
+
    .bar:hover {
       fill: #00f316;
     }
@@ -63,8 +74,8 @@
    }
 
    .myChart{
-       margin-top: 2px;
-       margin-bottom: 2px;
+       margin-top: 5px;
+       margin-bottom: 5px;
    }
    
 

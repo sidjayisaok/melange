@@ -36,51 +36,51 @@ const loopDate = ()=> {
 }
 
 //attempting to display graph history via nv.d3.js
-const showGraph = (thisData)=>{
-  nv.addGraph(function() {
-    var chart = nv.models.multiBarChart()
-      .transitionDuration(1000)
-      .reduceXTicks(true)   //If 'false', every single x-axis tick label will be rendered.
-      .rotateLabels(0)      //Angle to rotate x-axis labels.
-      .showControls(true)   //Allow user to switch between 'Grouped' and 'Stacked' mode.
-      .groupSpacing(0.1)    //Distance between each group of bars.
-    ;
+// const showGraph = (thisData)=>{
+//   nv.addGraph(function() {
+//     var chart = nv.models.multiBarChart()
+//       .transitionDuration(1000)
+//       .reduceXTicks(true)   //If 'false', every single x-axis tick label will be rendered.
+//       .rotateLabels(0)      //Angle to rotate x-axis labels.
+//       .showControls(true)   //Allow user to switch between 'Grouped' and 'Stacked' mode.
+//       .groupSpacing(0.1)    //Distance between each group of bars.
+//     ;
 
-    chart.xAxis
-        .tickFormat(d3.format(',f'));
+//     chart.xAxis
+//         .tickFormat(d3.format(',f'));
 
-    chart.yAxis
-        .tickFormat(d3.format(',.1f'));
+//     chart.yAxis
+//         .tickFormat(d3.format(',.1f'));
 
-    d3.select('svg')
-        .datum(exampleData(thisData))
-        .call(chart);
+//     d3.select('svg')
+//         .datum(exampleData(thisData))
+//         .call(chart);
 
-    nv.utils.windowResize(chart.update);
+//     nv.utils.windowResize(chart.update);
 
-    return chart;
-});
+//     return chart;
+// });
 
-const exampleData = (thisData)=> {
-  return thisData.map(function(data, i) {
-    return {
-      key: 'Stream #' + i,
-      values: data
-    };
-  });
-}
+// const exampleData = (thisData)=> {
+//   return thisData.map(function(data, i) {
+//     return {
+//       key: 'Stream #' + i,
+//       values: data
+//     };
+//   });
+// }
 
-}
+// }
 
 
 
 //function to grab the final results in the ajax history call
-const finalResults = (xData, yData)=> {
-  let forecast = [];
-  for (let i = 0; i < xData.length; i++) {
-    forecast.push({x: "xData", y: "yData" });
-  }
-  console.log(forecast);
+// const finalResults = (xData, yData)=> {
+//   let forecast = [];
+//   for (let i = 0; i < xData.length; i++) {
+//     forecast.push({x: "xData", y: "yData" });
+//   }
+//   console.log(forecast);
 //   //Line chart data should be sent as an array of series objects.
 //   return [
 //     {      
@@ -90,7 +90,7 @@ const finalResults = (xData, yData)=> {
 //       values: forecast
 //     }
 //   ];
-}
+// }
 
 $("#convert").on('click', function(event){
     event.preventDefault();
@@ -145,8 +145,7 @@ $("#convert").on('click', function(event){
 }
     //History call for the second API
     const loopAJAX = ()=>{
-         let newArrayY = [];
-         let newArrayX = [];
+         let newArray = [];
         for (i = 0; i < myDate.length; i++){
             $.ajax({
                 method: 'GET',
@@ -154,14 +153,14 @@ $("#convert").on('click', function(event){
                 datatype: 'json',
                 async: false
             }).done(function(response){
-                newArrayY.push(response.rates[yourCurrency]);
-                newArrayX.push(response.date);
-                // console.log(newArrayY);
+                newArray.push({value: response.rates[yourCurrency], name: response.date});
+                // newArrayX.push({"X": response.date});
                 // console.log(newArrayX);
-                showGraph(newArrayY);
-            //     let finalArray = deDuped(newArray);
-            //    newArray.push(response.rates[yourCurrency]);
-            //    console.log(finalArray);
+                console.log(newArray);
+                finalBarChart(newArray);
+                // showGraph(newArrayY);
+                //newArray.push(response.rates[yourCurrency]);
+                //  newArray.push(response.rates[yourCurrency]);
             })
         }       
 
@@ -223,6 +222,50 @@ d3.csv(ourData, (d)=> {
 }
 //display bar chart template
 mybarChart("/misc/data.csv");
+
+
+//d3 graph render
+const finalBarChart = (thisArray)=>{
+//delete duplicates
+for (let i = 0; i < thisArray.length; i++){
+   d3.select(".myChart").remove();
+}
+  //works with chart below
+  let x = d3.scale.linear()
+          .domain([0, d3.max(thisArray)])
+          .range([0, 420]);
+
+  let barChart =  d3.select("svg")
+                    .selectAll("svg")
+                    .data(thisArray)
+                    .enter()
+                    .append("div")
+                    .style("width", (d)=>{
+                      return x(d) + "px";
+                    })
+                    .style("background-color", (d)=>{
+                      if (d < 1) {
+                        return "red";
+                      }
+                      else if (d >= 1 && d < 2){
+                        return "orange";
+                      }
+                      else if(d >= 2 && d < 3){
+                        return "yellow";
+                      }
+                      else if(d >= 3 && d < 4){
+                        return "teal";
+                      }
+                      else{
+                        return "green";
+                      }
+                    })
+                    .style("color", "white")
+                    .attr("class", "myChart")
+                    .text((d)=>{
+                      return d;
+                });
+}
 
 
 
