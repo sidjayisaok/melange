@@ -27,15 +27,17 @@ function initMap() {
 function callback(results, status) {
   //array to log ratings API
   let thisArray = [];
+  let thatArray = [];
   if (status === google.maps.places.PlacesServiceStatus.OK) {
     for (var i = 0; i < results.length; i++) {
       createMarker(results[i]);
       //rating api here
       thisArray.push(results[i].rating);
+      thatArray.push(results[i].name);
     }
   }
   //render bar chart results
-   myBarChart(thisArray);
+   myBarChart(thisArray, thatArray);
 }
 //creates markers
 function createMarker(place) {
@@ -93,7 +95,7 @@ function createMarker(place) {
     });
   }
 //d3 graph render
-const myBarChart = (thisArray)=>{
+const myBarChart = (thisArray, thatArray)=>{
 //delete duplicates
 for (let i = 0; i < thisArray.length; i++){
    d3.select(".myChart").remove();
@@ -101,7 +103,7 @@ for (let i = 0; i < thisArray.length; i++){
   //works with chart below
   let x = d3.scale.linear()
           .domain([0, d3.max(thisArray)])
-          .range([0, 420]);
+          .range([0, 300]);
 
   let barChart =  d3.select(".chart")
                     .selectAll(".chart")
@@ -124,14 +126,17 @@ for (let i = 0; i < thisArray.length; i++){
                       else if(d >= 3 && d < 4){
                         return "teal";
                       }
+                      else if(isNaN(d)){
+                        return "black";
+                      }
                       else{
                         return "green";
                       }
                     })
                     .style("color", "white")
                     .attr("class", "myChart")
-                    .text((d)=>{
-                      return d;
+                    .text((d, i)=>{
+                        return thatArray[i] + " : " + d;      
                 });
 }
 

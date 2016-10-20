@@ -81,6 +81,27 @@
        margin-top: 5px;
        margin-bottom: 5px;
    }
+
+   @media (max-width: 480px) {
+       svg{
+           width: 100%;
+       }
+
+       .chart{
+           margin-top: 10px;
+       }
+    }
+
+    @media (max-width: 320px){
+        circle{
+            cx: 125;
+            r: 100;
+        }
+
+        .chart{
+           margin-top: 10px;
+       }
+    }
    
 
     

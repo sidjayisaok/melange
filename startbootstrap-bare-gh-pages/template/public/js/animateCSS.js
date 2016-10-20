@@ -3,7 +3,7 @@ $(function(){
 //variables added to reduce repetition
 let bounceInClass ='animated bounceIn';
 let rubberClass = 'animated rubberBand';
-let tadaClass = 'animated tada';
+let tadaClass = 'animated pulse';
 let bounceClass ='animated bounce';
 let flipClass = 'animated hinge';
 let bounceOutUpClass = 'animated bounceOutUp';
