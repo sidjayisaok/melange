@@ -20,6 +20,10 @@
         opacity: .05;
     }
 
+    svg {
+            display: block;
+        }
+
    .bar:hover {
       fill: #00f316;
     }

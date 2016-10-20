@@ -96,17 +96,25 @@ $("#convert").on('click', function(event){
                 datatype: 'json',
                 async: false
             }).done(function(response){
-                newArray.push({value: response.rates[yourCurrency], name: response.date});
+                newArray.push({x: response.date, y: response.rates[yourCurrency]});
+                return [
+                        {
+                            values: newArray,
+                            key: 'Value',
+                            color: '#ff7f0e'
+                        }
+                    ]
                 console.log(newArray);
             })
-        }       
-    }   
-loopAJAX();  
+         }       
+        } 
+//render our graph      
+finalChart(loopAJAX());  
 });
 
 
 const mybarChart = (ourData)=>{
-    //our barchart variables
+//our barchart variables
 let svg = d3.select("svg"),
 margin = {top: 20, right: 20, bottom: 30, left: 40},
 width = +svg.attr("width") - margin.left - margin.right,
@@ -155,6 +163,41 @@ d3.csv(ourData, (d)=> {
 }
 //display bar chart template
 mybarChart("/misc/data.csv");
+
+//nv.d3.js solution for dynamic graph
+const finalChart = (thisData)=>{
+    nv.addGraph(function() {
+        chart = nv.models.lineChart()
+            .options({
+                duration: 1000,
+                useInteractiveGuideline: true
+            });
+
+        chart.xAxis
+             .axisLabel("Day")
+             .tickFormat(d3.format(',.1f'))
+             .staggerLabels(true);
+
+        chart.yAxis
+             .axisLabel('Value')
+              .tickFormat((d)=> {
+                if (d === null) {
+                    return 'N/A';
+                }
+                return d3.format(',.2f')(d);
+            });
+
+        data = thisData;
+        d3.select('#barChart')
+          .append('svg')
+          .datum(data)
+          .call(chart);
+            
+        nv.utils.windowResize(chart.update);
+        return chart;
+    });
+}
+
 
 
 
