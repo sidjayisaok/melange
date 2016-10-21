@@ -9,10 +9,10 @@
         padding: 0; 
     }
 
-    body:before{
+    body:before {
         background-image: url("../misc/repeatBG.jpg");
         content: "";
-        height: 150%;
+        height: 185%;
         width: 100%;
         position: absolute;
         top: 0;
@@ -80,6 +80,7 @@
    .myChart{
        margin-top: 5px;
        margin-bottom: 5px;
+       padding: 2%;
    }
 
    @media (max-width: 480px) {
@@ -93,10 +94,6 @@
     }
 
     @media (max-width: 320px){
-        circle{
-            cx: 125;
-            r: 100;
-        }
 
         .chart{
            margin-top: 10px;
