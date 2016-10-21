@@ -6,7 +6,7 @@ var favIcon = require('serve-favicon');
 var Port = process.env.PORT || 8000;
 
 //middleware stuff
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
