@@ -3,17 +3,8 @@
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 //don't use es6 or it'll break the code
 
-//variables used
-var map;
-var infowindow;
-//start map protocol
-function initMap() {
-  var searchResults = {lat: 40.7128, lng: -74.0059};
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: searchResults,
-    zoom: 13
-  });
-  //sets up info window
+function myInfoWindow(searchResults){
+    //sets up info window
   infowindow = new google.maps.InfoWindow();
   var service = new google.maps.places.PlacesService(map);
   service.nearbySearch({
@@ -22,6 +13,19 @@ function initMap() {
     // change the types using https://developers.google.com/places/supported_types as a reference
     type: ['restaurant']
   }, callback);
+}
+
+//variables used
+var map;
+var infowindow;
+var searchResults = {lat: 40.7128, lng: -74.0059};
+//start map protocol
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: searchResults,
+    zoom: 13
+  });
+  myInfoWindow(searchResults);
 }
 //pulls up markers
 function callback(results, status) {
@@ -77,20 +81,12 @@ function createMarker(place) {
       latitude = results[0].geometry.location.lat();
       longitude = results[0].geometry.location.lng();
       //attempting search fix
-      var searchResults = {lat: parseFloat(latitude), lng: parseFloat(longitude)};
+      var newSearchResults = {lat: parseFloat(latitude), lng: parseFloat(longitude)};
       map = new google.maps.Map(document.getElementById('map'), {
-        center: searchResults,
+        center: newSearchResults,
         zoom: 15
       });
-      //sets up info window
-      infowindow = new google.maps.InfoWindow();
-      var service = new google.maps.places.PlacesService(map);
-      service.nearbySearch({
-        location: searchResults,
-        radius: 2500,
-        // change the types using https://developers.google.com/places/supported_types as a reference
-        type: ['restaurant']
-      }, callback);
+      myInfoWindow(newSearchResults);
       }
     });
   }
