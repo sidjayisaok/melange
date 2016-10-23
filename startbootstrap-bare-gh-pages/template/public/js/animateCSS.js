@@ -5,8 +5,8 @@ let bounceInClass ='animated bounceIn';
 let rubberClass = 'animated rubberBand';
 let tadaClass = 'animated pulse';
 let bounceClass ='animated bounce';
-let flipClass = 'animated hinge';
-let bounceOutUpClass = 'animated bounceOutUp';
+let flipClass = 'animated zoomOut';
+let bounceOutUpClass = 'animated fadeOut';
 let endClass ='webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
 //animates list
 $('li').on({

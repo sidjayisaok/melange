@@ -14,7 +14,6 @@ function myInfoWindow(searchResults){
     type: ['restaurant']
   }, callback);
 }
-
 //variables used
 var map;
 var infowindow;
@@ -119,19 +118,25 @@ for (let i = 0; i < thisArray.length; i++){
                       else if(d >= 2 && d < 3){
                         return "yellow";
                       }
-                      else if(d >= 3 && d < 4){
-                        return "teal";
+                      else if(d >= 3 && d < 3.5){
+                        return "turquoise";
+                      }
+                      else if(d >= 3.5 && d < 4){
+                         return "teal";
+                      }
+                      else if(d >= 4 && d < 4.5){
+                         return "green";
                       }
                       else if(isNaN(d)){
                         return "black";
                       }
                       else{
-                        return "green";
+                        return "lawngreen";
                       }
                     })
                     .style("color", (d)=>{
-                      if (d >=2 && d < 3){
-                        return "grey";
+                      if (d >=2 && d < 3.5) {
+                        return "darkslateblue";
                       }
                       else{
                         return "white";
