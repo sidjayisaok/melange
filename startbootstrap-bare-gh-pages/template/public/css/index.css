@@ -49,11 +49,11 @@
    }
 
     a:link {
-        color: #00ff88;
+        color: #3288ff;
     }
 
     a:visited {
-        color: #00f316;
+        color: #1699ff;
     }
 
     a:hover {
@@ -83,20 +83,20 @@
        padding: 2%;
    }
 
-   @media (max-width: 480px) {
+   @media (max-width: 760px) {
        svg{
            width: 100%;
        }
 
        .chart{
-           margin-top: 10px;
+           margin: 2%;
        }
     }
 
     @media (max-width: 320px){
 
         .chart{
-           margin-top: 10px;
+           margin: 20px;
        }
     }
    

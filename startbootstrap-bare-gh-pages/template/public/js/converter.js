@@ -2,6 +2,9 @@
 //api provided using http://fixer.io/
 //exchange rates set by the European Central Bank
 
+//module export d3 chart via Browserify bundle.js
+let my_barChart = require('./my_barChart').my_barChart;
+
 //creates a useable date format
 const formatDate = (date)=>{
     let dd = date.getDate();
@@ -49,7 +52,6 @@ $("#convert").on('click', function(event){
 
     //API link
     let queryURL = "https://api.fixer.io/latest?base=" + myCurrency + "&rates=" + yourCurrency;
-    // let historyURL = ;
     
     //logic controllers
     if(yourAmount <= 0){
@@ -73,96 +75,8 @@ $("#convert").on('click', function(event){
         $(".currentDate").html(" Rates current as of " + res.date);
         $(".myConversion").html(" You have selected " + res.base);
         $(".myRatio").html(" The current ratio is 1 " + res.base + " to " + res.rates[yourCurrency] + " " + yourCurrency);
-        $(".yourConversion").html(" Converting " + yourAmount + " " + myCurrency + " is worth approximately " + (res.rates[yourCurrency]*yourAmount).toFixed(2) + " " + yourCurrency);
+        $(".yourConversion").html(" Converting " + yourAmount + " " + myCurrency + " is worth approximately " + (res.rates[yourCurrency]*yourAmount).toFixed(3) + " " + yourCurrency);
     });
-
-    //this function removes duplicates
-    const deDuped = (resArray)=>{
-        let dateArray = resArray.map((res)=>res.date);
-        let dateSet = new Set();
-        dateArray.forEach((date)=> dateSet.add(date));
-        let noRepeat = [...dateSet]
-                        .map((d)=>resArray
-                        .find((r)=> r.date === d));
-        return noRepeat;
-}
-    //History call for the second API
-    const loopAJAX = ()=>{
-         let newArray = [];
-        for (i = 0; i < myDate.length; i++){
-            $.ajax({
-                method: 'GET',
-                url: myDate[i] + "?base=" + myCurrency,
-                datatype: 'json',
-                async: false
-            }).done(function(response){
-                newArray.push({x: response.date, y: response.rates[yourCurrency]});
-                return [
-                        {
-                            values: newArray,
-                            key: 'Value',
-                            color: '#ff7f0e'
-                        }
-                    ]
-                console.log(newArray);
-            })
-         }       
-        } 
-//render our graph      
-finalChart(loopAJAX());  
-});
-
-
-const mybarChart = (ourData)=>{
-//our barchart variables
-let svg = d3.select("svg"),
-margin = {top: 20, right: 20, bottom: 30, left: 40},
-width = +svg.attr("width") - margin.left - margin.right,
-height = +svg.attr("height") - margin.top - margin.bottom;
-
-let x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
-    y = d3.scaleLinear().rangeRound([height, 0]);
-
-let g = svg.append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-//data using csv file
-d3.csv(ourData, (d)=> {
-  d.frequency = +d.frequency;
-  return d;
-}, function(error, data) {
-  if (error) throw error;
-//declare our x and y axes
-  x.domain(data.map((d)=> { return d.letter; }));
-  y.domain([0, d3.max(data, (d)=> { return d.frequency; })]);
-
-  g.append("g")
-      .attr("class", "axis axis--x")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
-
-  g.append("g")
-      .attr("class", "axis axis--y")
-      .call(d3.axisLeft(y).ticks(10, "%"))
-      .append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 6)
-      .attr("dy", "0.71em")
-      .attr("text-anchor", "end")
-      .text("Frequency");
-//render the bar graph
-  g.selectAll(".bar")
-    .data(data)
-    .enter().append("rect")
-    .attr("class", "bar")
-    .attr("x", (d)=> { return x(d.letter); })
-    .attr("y", (d)=> { return y(d.frequency); })
-    .attr("width", x.bandwidth())
-    .attr("fill", "green")
-    .attr("height", (d)=> { return height - y(d.frequency); });
-});
-}
-//display bar chart template
-mybarChart("/misc/data.csv");
 
 //nv.d3.js solution for dynamic graph
 const finalChart = (thisData)=>{
@@ -180,7 +94,7 @@ const finalChart = (thisData)=>{
 
         chart.yAxis
              .axisLabel('Value')
-              .tickFormat((d)=> {
+              .tickFormat(function(d) {
                 if (d === null) {
                     return 'N/A';
                 }
@@ -197,6 +111,34 @@ const finalChart = (thisData)=>{
         return chart;
     });
 }
+
+
+    //History call for the second API
+    const loopAJAX = ()=>{
+         let newArray = [];
+        for (i = 0; i < myDate.length; i++){
+            $.ajax({
+                method: 'GET',
+                url: myDate[i] + "?base=" + myCurrency,
+                datatype: 'json',
+                async: false
+            }).done(function(response){
+               newArray.push({x: response.date, y: response.rates[yourCurrency]});
+               console.log(newArray);
+            })
+        } 
+            return [{
+            values: newArray,
+            key: 'Value',
+            color: '#ff7f0e',
+            area: true
+            }];     
+        }      
+          
+   loopAJAX();
+}); 
+
+my_barChart("/misc/data.csv");
 
 
 

@@ -133,7 +133,14 @@ for (let i = 0; i < thisArray.length; i++){
                         return "green";
                       }
                     })
-                    .style("color", "white")
+                    .style("color", (d)=>{
+                      if (d >=2 && d < 3){
+                        return "grey";
+                      }
+                      else{
+                        return "white";
+                      }
+                    })
                     .attr("class", "myChart")
                     .text((d, i)=>{
                         return thatArray[i] + " : " + d;      
