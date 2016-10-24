@@ -102,7 +102,7 @@ const finalChart = (thisData)=>{
             });
 
         data = thisData;
-        d3.select('#barChart')
+        d3.select('.newChart')
           .append('svg')
           .datum(data)
           .call(chart);
@@ -135,7 +135,7 @@ const finalChart = (thisData)=>{
             }];     
         }      
           
-   loopAJAX();
+   $(".newChart").html(finalChart(loopAJAX()));
 }); 
 
 my_barChart("/misc/data.csv");

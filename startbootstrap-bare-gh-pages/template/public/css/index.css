@@ -11,6 +11,7 @@
 
     body:before {
         background-image: url("../misc/repeatBG.jpg");
+        background-attachment: fixed;
         content: "";
         height: 185%;
         width: 100%;
@@ -81,9 +82,10 @@
        margin-top: 5px;
        margin-bottom: 5px;
        padding: 2%;
+       stroke: black;
    }
 
-   @media (max-width: 760px) {
+   @media (max-width: 800px) {
        svg{
            width: 100%;
        }
