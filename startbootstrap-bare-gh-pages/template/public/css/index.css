@@ -85,6 +85,13 @@
        stroke: black;
    }
 
+   @media (max-width: 1000px){
+
+        .navbar-fixed-top{
+           position: inherit;
+       }
+    }
+
    @media (max-width: 800px) {
        svg{
            width: 100%;
