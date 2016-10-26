@@ -78,38 +78,63 @@ $("#convert").on('click', function(event){
         $(".yourConversion").html(" Converting " + yourAmount + " " + myCurrency + " is worth approximately " + (res.rates[yourCurrency]*yourAmount).toFixed(3) + " " + yourCurrency);
     });
 
-//nv.d3.js solution for dynamic graph
-const finalChart = (thisData)=>{
-    nv.addGraph(function() {
-        chart = nv.models.lineChart()
-            .options({
-                duration: 1000,
-                useInteractiveGuideline: true
-            });
+//d3 graph render
+const myBarChart = (thisArray, thatArray)=>{
+//delete duplicates
+for (let i = 0; i < thisArray.length; i++){
+   d3.select(".myChart").remove();
+}
+  //works with chart below
+  let x = d3.scale.linear()
+          .domain([0, d3.max(thisArray)])
+          .range([0, 300]);
 
-        chart.xAxis
-             .axisLabel("Day")
-             .tickFormat(d3.format(',.1f'))
-             .staggerLabels(true);
-
-        chart.yAxis
-             .axisLabel('Value')
-              .tickFormat(function(d) {
-                if (d === null) {
-                    return 'N/A';
-                }
-                return d3.format(',.2f')(d);
-            });
-
-        data = thisData;
-        d3.select('.newChart')
-          .append('svg')
-          .datum(data)
-          .call(chart);
-            
-        nv.utils.windowResize(chart.update);
-        return chart;
-    });
+  let barChart =  d3.select(".chart")
+                    .selectAll(".chart")
+                    .data(thisArray)
+                    .enter()
+                    .append("div")
+                    .style("width", (d)=>{
+                      return x(d) + "px";
+                    })
+                    .style("background-color", (d)=>{
+                      if (d < 1) {
+                        return "red";
+                      }
+                      else if (d >= 1 && d < 2){
+                        return "orange";
+                      }
+                      else if(d >= 2 && d < 3){
+                        return "yellow";
+                      }
+                      else if(d >= 3 && d < 3.5){
+                        return "turquoise";
+                      }
+                      else if(d >= 3.5 && d < 4){
+                         return "teal";
+                      }
+                      else if(d >= 4 && d < 4.5){
+                         return "green";
+                      }
+                      else if(isNaN(d)){
+                        return "black";
+                      }
+                      else{
+                        return "lawngreen";
+                      }
+                    })
+                    .style("color", (d)=>{
+                      if (d >=2 && d < 3.5) {
+                        return "darkslateblue";
+                      }
+                      else{
+                        return "white";
+                      }
+                    })
+                    .attr("class", "myChart")
+                    .text((d, i)=>{
+                        return thatArray[i] + " : " + d;      
+                });
 }
 
 

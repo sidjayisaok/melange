@@ -96,9 +96,6 @@ for (let i = 0; i < thisArray.length; i++){
    d3.select(".myChart").remove();
 }
   //works with chart below
-  let height = 20 * thisArray.length;
-
-
   let x = d3.scale.linear()
           .domain([0, d3.max(thisArray)])
           .range([0, 300]);       
