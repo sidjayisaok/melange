@@ -13,6 +13,7 @@ function myInfoWindow(searchResults){
     // change the types using https://developers.google.com/places/supported_types as a reference
     type: ['restaurant']
   }, callback);
+  return false;
 }
 //variables used
 var map;
@@ -25,6 +26,7 @@ function initMap() {
     zoom: 13
   });
   myInfoWindow(searchResults);
+  return false;
 }
 //pulls up markers
 function callback(results, status) {
@@ -41,6 +43,7 @@ function callback(results, status) {
   }
   //render bar chart results
    myBarChart(thisArray, thatArray);
+   return false;
 }
 //creates markers
 function createMarker(place) {
@@ -66,11 +69,12 @@ function createMarker(place) {
     infowindow.setContent(place.name);
     infowindow.open(map, this);
   });
+  return false;
   }
 
   // trying to implement search, this is pulling up the latitude and longitude
   //figure out how to change the latitude and longitude into search factors
-  function searchFunc(){
+ document.getElementById('searchFunc').onclick = function searchFunc(){
     var geocoder = new google.maps.Geocoder();
     var address = document.getElementById('address-input').value;
     var longitude;
@@ -86,8 +90,10 @@ function createMarker(place) {
         zoom: 15
       });
       myInfoWindow(newSearchResults);
+      return false;
       }
     });
+    return false;
   }
 //d3 graph render
 const myBarChart = (thisArray, thatArray)=>{
@@ -146,6 +152,7 @@ for (let i = 0; i < thisArray.length; i++){
                     .text((d, i)=>{
                         return thatArray[i] + " : " + d;      
                 });
+                return false;
 }
 
 

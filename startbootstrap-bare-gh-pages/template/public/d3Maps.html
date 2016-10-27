@@ -71,8 +71,13 @@
        <div class="alert alert-info">
         <h6>Enter city or postal code</h6>
         <hr class="m-y-2">
-        <input type="text" id="address-input" class="text-center"> 
-        <button class="btn btn-sm btn-info" onclick="searchFunc();"><i class="fa fa-map" aria-hidden="true"></i> search</button>
+        <form>
+            <div class="form-group text-center">
+                <input type="text" id="address-input" class="form-control text-center" placeholder="e.g. Los Angeles or 90210"> 
+                <br />
+                <button class="btn btn-sm btn-info" type="submit" id="searchFunc"><i class="fa fa-map" aria-hidden="true"></i> search</button>
+            </div>
+        </form>
        </div>
        <hr class="m-y-2">
     </div>
