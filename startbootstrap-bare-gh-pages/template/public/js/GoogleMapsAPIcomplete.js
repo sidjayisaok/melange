@@ -87,7 +87,7 @@ function createMarker(place) {
       var newSearchResults = {lat: parseFloat(latitude), lng: parseFloat(longitude)};
       map = new google.maps.Map(document.getElementById('map'), {
         center: newSearchResults,
-        zoom: 15
+        zoom: 12
       });
       myInfoWindow(newSearchResults);
       return false;
