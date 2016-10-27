@@ -85,25 +85,29 @@
        stroke: black;
    }
 
-   @media (max-width: 1000px){
 
+   @media (max-width: 1000px) {
         .navbar-fixed-top{
            position: inherit;
-       }
-    }
+        }
 
-   @media (max-width: 800px) {
        svg{
            width: 100%;
        }
 
        .chart{
-           margin: 2%;
+           margin-top: 2%;
+       }
+    }
+
+    @media (max-width: 760px) {
+       .chart{
+           margin-left: 2%;
+           margin-right: 2%;
        }
     }
 
     @media (max-width: 320px){
-
         .chart{
            margin: 20px;
        }
