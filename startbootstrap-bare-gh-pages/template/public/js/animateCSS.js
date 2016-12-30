@@ -1,6 +1,23 @@
-//animate.css jquery controls
-$(function(){
 //variables added to reduce repetition
+let Currency = '#Currency';
+let BMI = '#BMI';
+let Maps = '#Maps';
+let Restaurant = '#Restaurant';
+let Portfolio = '#Portfolio';
+let Alertify = '#Alertify';
+let AnimateCSS = '#AnimateCSS';
+let Bootstrap = '#Bootstrap';
+let Browserify = '#Browserify';
+let d3 = '#d3';
+let FontAwesome = '#FontAwesome';
+let GMaps = '#GMaps';
+let Novus = '#Novus';
+let estimate = '#estimate';
+let convert = '#convert';
+let searchFunc = '#searchFunc';
+let solve = '#solve';
+
+//animate.css classes here
 let bounceInClass ='animated bounceIn';
 let rubberClass = 'animated rubberBand';
 let tadaClass = 'animated pulse';
@@ -8,52 +25,64 @@ let bounceClass ='animated jello';
 let flipClass = 'animated zoomOut';
 let bounceOutUpClass = 'animated fadeOut';
 let endClass ='webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-//animates list
-$('li').on({
 
- 'click': ()=>{
-     $('li').addClass(bounceInClass).one(endClass, function(){
-         $(this).removeClass(bounceInClass);
-     })
- },
-//this makes them animate when hovering over them via the mouse
- 'mouseover': ()=>{
-     $('li').addClass(tadaClass).one(endClass, function(){
-         $(this).removeClass(tadaClass);
-     })
- }
-});
+//DRY version to control image animation
+function logicAnim(param, classA, classB){
 
-//animates button
-$('button').on({
+    var endClass ='webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
 
- 'click': ()=>{
-     $('button').addClass(rubberClass).one(endClass, function(){
-         $(this).removeClass(rubberClass);
-     })
- },
-//this makes them animate when hovering over them via the mouse
- 'mouseover': ()=>{
-     $('button').addClass(bounceClass).one(endClass, function(){
-         $(this).removeClass(bounceClass);
-     })
- }
-});
+     $(param).on({
+        'click': function(){
+            $(param).addClass(classA).one(endClass, function(){
+                $(this).removeClass(classA);
+            })
+        },
 
-//animates links
-$('.flipThis').on({
+        'mouseover': function(){
+            $(param).addClass(classB).one(endClass, function(){
+                $(this).removeClass(classB);
+            })
+        }
+    });
+}
 
- 'click': ()=>{
-     $('.flipThis').addClass(flipClass).one(endClass, function(){
-         $(this).removeClass(flipClass);
-     })
- },
-//this makes them animate when hovering over them via the mouse
- 'mouseover': ()=>{
-     $('.flipThis').addClass(bounceOutUpClass).one(endClass, function(){
-         $(this).removeClass(bounceOutUpClass);
-     })
- }
-});
 
-});
+//call functions for top menu span
+logicAnim(BMI, bounceInClass, tadaClass);
+
+logicAnim(Currency, bounceInClass, tadaClass);
+
+logicAnim(Maps, bounceInClass, tadaClass);
+
+logicAnim(Restaurant, bounceInClass, tadaClass);
+
+logicAnim(Portfolio, bounceInClass, tadaClass);
+
+//these are for the home page tools list
+
+logicAnim(Alertify, flipClass, bounceOutUpClass);
+
+logicAnim(AnimateCSS, flipClass, bounceOutUpClass);
+
+logicAnim(Bootstrap, flipClass, bounceOutUpClass);
+
+logicAnim(Browserify, flipClass, bounceOutUpClass);
+
+logicAnim(d3, flipClass, bounceOutUpClass);
+
+logicAnim(FontAwesome, flipClass, bounceOutUpClass);
+
+logicAnim(GMaps, flipClass, bounceOutUpClass);
+
+logicAnim(Novus, flipClass, bounceOutUpClass);
+
+//these are for the page buttons
+
+logicAnim(estimate, rubberClass, bounceClass);
+
+logicAnim(convert, rubberClass, bounceClass);
+
+logicAnim(searchFunc, rubberClass, bounceClass);
+
+logicAnim(solve, rubberClass, bounceClass);
+

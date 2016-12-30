@@ -35,6 +35,7 @@
 
     .jumbotron{
         fill:  #6baed6;
+        box-shadow: 1px 2px 3px #333355;
     }
 
     circle.myTarget{
@@ -58,7 +59,8 @@
     }
 
     a:hover {
-        color: #f1f2f3;
+        color: #163216;
+        text-decoration: none;
     }
 
     a:active {
