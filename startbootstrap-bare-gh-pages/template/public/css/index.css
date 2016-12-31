@@ -21,6 +21,10 @@
         opacity: .05;
     }
 
+    button{
+        box-shadow: 2px 4px 6px #163216;
+    }
+
     svg {
             display: block;
         }
