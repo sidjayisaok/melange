@@ -8,7 +8,7 @@ let Alertify = '#Alertify';
 let AnimateCSS = '#AnimateCSS';
 let Bootstrap = '#Bootstrap';
 let Browserify = '#Browserify';
-let d3 = '#d3';
+let myd3 = '#d3';
 let FontAwesome = '#FontAwesome';
 let GMaps = '#GMaps';
 let Novus = '#Novus';
@@ -28,8 +28,6 @@ let endClass ='webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend a
 
 //DRY version to control image animation
 function logicAnim(param, classA, classB){
-
-    var endClass ='webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
 
      $(param).on({
         'click': function(){
@@ -68,7 +66,7 @@ logicAnim(Bootstrap, flipClass, bounceOutUpClass);
 
 logicAnim(Browserify, flipClass, bounceOutUpClass);
 
-logicAnim(d3, flipClass, bounceOutUpClass);
+logicAnim(myd3, flipClass, bounceOutUpClass);
 
 logicAnim(FontAwesome, flipClass, bounceOutUpClass);
 

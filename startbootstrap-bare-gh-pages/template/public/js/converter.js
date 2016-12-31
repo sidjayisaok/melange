@@ -2,9 +2,6 @@
 //api provided using http://fixer.io/
 //exchange rates set by the European Central Bank
 
-//module export d3 chart via Browserify bundle.js
-let my_barChart = require('./my_barChart').my_barChart;
-
 $("#convert").on('click', function(event){
     event.preventDefault();
     //our basic variables
@@ -45,7 +42,56 @@ $("#convert").on('click', function(event){
     });
 }); 
 
-my_barChart("/misc/data.csv");
+const mybarChart = (ourData)=>{
+//our barchart variables
+let svg = d3.select("svg"),
+margin = {top: 20, right: 20, bottom: 30, left: 40},
+width = +svg.attr("width") - margin.left - margin.right,
+height = +svg.attr("height") - margin.top - margin.bottom;
+
+let x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+    y = d3.scaleLinear().rangeRound([height, 0]);
+
+let g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+//data using csv file
+d3.csv(ourData, (d)=> {
+  d.frequency = +d.frequency;
+  return d;
+}, function(error, data) {
+  if (error) throw error;
+//declare our x and y axes
+  x.domain(data.map((d)=> { return d.letter; }));
+  y.domain([0, d3.max(data, (d)=> { return d.frequency; })]);
+
+  g.append("g")
+      .attr("class", "axis axis--x")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
+
+  g.append("g")
+      .attr("class", "axis axis--y")
+      .call(d3.axisLeft(y).ticks(10, "%"))
+      .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", "0.71em")
+      .attr("text-anchor", "end")
+      .text("Frequency");
+//render the bar graph
+  g.selectAll(".bar")
+    .data(data)
+    .enter().append("rect")
+    .attr("class", "bar")
+    .attr("x", (d)=> { return x(d.letter); })
+    .attr("y", (d)=> { return y(d.frequency); })
+    .attr("width", x.bandwidth())
+    .attr("fill", "green")
+    .attr("height", (d)=> { return height - y(d.frequency); });
+});
+}
+
+mybarChart("/misc/data.csv");
 
 
 

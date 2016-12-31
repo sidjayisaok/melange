@@ -119,16 +119,16 @@ for (let i = 0; i < thisArray.length; i++){
                         return "red";
                       }
                       else if (d >= 1 && d < 2){
-                        return "orange";
+                        return "purple";
                       }
                       else if(d >= 2 && d < 3){
-                        return "yellow";
+                        return "orange";
                       }
                       else if(d >= 3 && d < 3.5){
-                        return "turquoise";
+                        return "yellow";
                       }
                       else if(d >= 3.5 && d < 4){
-                         return "teal";
+                         return "lawngreen";
                       }
                       else if(d >= 4 && d < 4.5){
                          return "green";
@@ -137,11 +137,11 @@ for (let i = 0; i < thisArray.length; i++){
                         return "black";
                       }
                       else{
-                        return "lawngreen";
+                        return "blue";
                       }
                     })
                     .style("color", (d)=>{
-                      if (d >=2 && d < 3.5) {
+                      if (d >=3 && d < 4) {
                         return "darkslateblue";
                       }
                       else{
