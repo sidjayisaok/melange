@@ -25,6 +25,18 @@
         box-shadow: 2px 4px 6px #163216;
     }
 
+    .homepage{
+        width: 100px;
+        height: 100px;
+        margin: 5% 0% 5% 0%;
+        background-color: #000088;
+        border-radius: 50%;
+    }
+
+    .homepage:hover{
+        background-color: #003388;
+    }
+
     svg {
             display: block;
         }

@@ -16,6 +16,10 @@ let estimate = '#estimate';
 let convert = '#convert';
 let searchFunc = '#searchFunc';
 let solve = '#solve';
+let bmiButton = '#bmiButton';
+let currencyButton = '#currencyButton';
+let gMapsButton = '#gMapsButton';
+let tipButton = '#tipButton';
 
 //animate.css classes here
 let bounceInClass ='animated bounceIn';
@@ -83,4 +87,12 @@ logicAnim(convert, rubberClass, bounceClass);
 logicAnim(searchFunc, rubberClass, bounceClass);
 
 logicAnim(solve, rubberClass, bounceClass);
+
+logicAnim(bmiButton, rubberClass, bounceClass);
+
+logicAnim(currencyButton, rubberClass, bounceClass);
+
+logicAnim(gMapsButton, rubberClass, bounceClass);
+
+logicAnim(tipButton, rubberClass, bounceClass);
 
